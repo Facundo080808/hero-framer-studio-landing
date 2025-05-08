@@ -231,25 +231,7 @@ export function AuthoritySection() {
 
           <motion.div variants={itemVariants} className="order-1 lg:order-2 relative">
             <div className="relative h-[400px] w-full">
-              <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-2/3 h-auto z-10">
-                <Image
-                  src="/placeholder.svg?height=300&width=400"
-                  alt={t("authority.image1.alt")}
-                  width={400}
-                  height={300}
-                  className="w-full h-auto rounded-lg shadow-xl border border-white/20"
-                />
-              </motion.div>
-
-              <motion.div style={{ y: y2 }} className="absolute bottom-0 right-0 w-2/3 h-auto z-20">
-                <Image
-                  src="/placeholder.svg?height=300&width=400"
-                  alt={t("authority.image2.alt")}
-                  width={400}
-                  height={300}
-                  className="w-full h-auto rounded-lg shadow-xl border border-white/20"
-                />
-              </motion.div>
+             
 
               <motion.div
                 style={{ y: y3 }}
