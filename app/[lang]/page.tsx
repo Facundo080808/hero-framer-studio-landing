@@ -18,7 +18,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <HeroSection />
-      <FaqSection />
+      
       <AuthoritySection />
       <ServicesSection />
       <ProcessSection />
@@ -27,6 +27,7 @@ export default function Home() {
       <PricingSection />
       <ContactForm />
       <CtaSection />
+      <FaqSection />
       <Footer />
       <WhatsAppButton />
       <CookieConsent />
