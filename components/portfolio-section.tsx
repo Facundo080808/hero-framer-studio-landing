@@ -4,8 +4,10 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/contexts/language-context"
 
 export function PortfolioSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -33,39 +35,45 @@ export function PortfolioSection() {
   const portfolioItems = [
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "TechSolutions Inc.",
-      type: "Landing Page de Ventas",
-      result: "45% más conversiones",
+      client: t("portfolio.item1.client"),
+      type: t("portfolio.item1.type"),
+      result: t("portfolio.item1.result"),
+      alt: t("portfolio.item1.alt"),
     },
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "EcoFriendly",
-      type: "Landing Page Lead Magnet",
-      result: "320 leads en 1 semana",
+      client: t("portfolio.item2.client"),
+      type: t("portfolio.item2.type"),
+      result: t("portfolio.item2.result"),
+      alt: t("portfolio.item2.alt"),
     },
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "FinanceGrow",
-      type: "Landing Page de Ventas",
-      result: "67% más tiempo en página",
+      client: t("portfolio.item3.client"),
+      type: t("portfolio.item3.type"),
+      result: t("portfolio.item3.result"),
+      alt: t("portfolio.item3.alt"),
     },
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "EventMasters",
-      type: "Landing Page Evento",
-      result: "98% de registros completados",
+      client: t("portfolio.item4.client"),
+      type: t("portfolio.item4.type"),
+      result: t("portfolio.item4.result"),
+      alt: t("portfolio.item4.alt"),
     },
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "HealthPlus",
-      type: "Landing Page Lead Magnet",
-      result: "52% tasa de conversión",
+      client: t("portfolio.item5.client"),
+      type: t("portfolio.item5.type"),
+      result: t("portfolio.item5.result"),
+      alt: t("portfolio.item5.alt"),
     },
     {
       image: "/placeholder.svg?height=400&width=600",
-      client: "TravelDreams",
-      type: "Landing Page de Ventas",
-      result: "3x ROI en campañas",
+      client: t("portfolio.item6.client"),
+      type: t("portfolio.item6.type"),
+      result: t("portfolio.item6.result"),
+      alt: t("portfolio.item6.alt"),
     },
   ]
 
@@ -82,10 +90,10 @@ export function PortfolioSection() {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white"
           >
-            Casos de éxito que hablan por sí mismos
+            {t("portfolio.title")}
           </motion.h2>
           <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Descubre cómo hemos ayudado a empresas a aumentar sus conversiones con landing pages estratégicas.
+            {t("portfolio.subtitle")}
           </motion.p>
         </motion.div>
 
@@ -103,7 +111,7 @@ export function PortfolioSection() {
             >
               <Image
                 src={item.image || "/placeholder.svg"}
-                alt={item.client}
+                alt={item.alt}
                 width={600}
                 height={400}
                 className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
@@ -121,7 +129,7 @@ export function PortfolioSection() {
 
         <motion.div variants={itemVariants} className="text-center mt-12">
           <Button size="lg" className="bg-secondary hover:bg-secondary/90 text-white">
-            Ver todo el portafolio
+            {t("portfolio.button")}
           </Button>
         </motion.div>
       </div>

@@ -3,8 +3,10 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Search, Palette, Code, BarChart } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function ProcessSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -31,23 +33,23 @@ export function ProcessSection() {
 
   const processSteps = [
     {
-      title: "Estrategia & Investigación",
-      description: "Analizamos tu audiencia, competencia y objetivos para crear una estrategia ganadora.",
+      title: t("process.step1.title"),
+      description: t("process.step1.description"),
       icon: <Search className="h-10 w-10 text-secondary" />,
     },
     {
-      title: "Diseño & Copywriting",
-      description: "Creamos diseños atractivos y textos persuasivos que conectan con tu audiencia.",
+      title: t("process.step2.title"),
+      description: t("process.step2.description"),
       icon: <Palette className="h-10 w-10 text-secondary" />,
     },
     {
-      title: "Desarrollo & Animaciones",
-      description: "Implementamos tu landing page con código limpio y animaciones que capturan la atención.",
+      title: t("process.step3.title"),
+      description: t("process.step3.description"),
       icon: <Code className="h-10 w-10 text-secondary" />,
     },
     {
-      title: "Pruebas & Optimización",
-      description: "Realizamos pruebas A/B y optimizamos continuamente para maximizar conversiones.",
+      title: t("process.step4.title"),
+      description: t("process.step4.description"),
       icon: <BarChart className="h-10 w-10 text-secondary" />,
     },
   ]
@@ -65,10 +67,10 @@ export function ProcessSection() {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white"
           >
-            Nuestro proceso probado para el éxito
+            {t("process.title")}
           </motion.h2>
           <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un enfoque metódico que garantiza landing pages de alto rendimiento y resultados excepcionales.
+            {t("process.subtitle")}
           </motion.p>
         </motion.div>
 

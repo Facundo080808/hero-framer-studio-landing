@@ -33,29 +33,24 @@ export function FaqSection() {
 
   const faqs = [
     {
-      question: "¿Cuánto tiempo tarda en crearse una landing page?",
-      answer:
-        "El tiempo de desarrollo depende de la complejidad del proyecto. Nuestras landing pages esenciales se entregan en 7 días, las profesionales en 10 días y las premium en 14 días. Cada proyecto incluye una fase de revisión para asegurar que todo cumpla con tus expectativas.",
+      question: t("faq.q1.question"),
+      answer: t("faq.q1.answer"),
     },
     {
-      question: "¿Qué información necesitan para empezar?",
-      answer:
-        "Para comenzar, necesitamos entender tus objetivos de negocio, tu audiencia objetivo, y cualquier material de marca existente (logo, colores, etc.). También es útil si puedes compartir ejemplos de landing pages que te gusten o referencias de la competencia. Con esta información, podemos crear una estrategia personalizada para tu proyecto.",
+      question: t("faq.q2.question"),
+      answer: t("faq.q2.answer"),
     },
     {
-      question: "¿Las landing pages incluyen hosting?",
-      answer:
-        "Nuestros servicios no incluyen hosting por defecto, pero ofrecemos opciones de alojamiento como un servicio adicional. También podemos implementar la landing page en tu hosting existente o recomendarte proveedores confiables según tus necesidades específicas.",
+      question: t("faq.q3.question"),
+      answer: t("faq.q3.answer"),
     },
     {
-      question: "¿Ofrecen mantenimiento después del lanzamiento?",
-      answer:
-        "Sí, ofrecemos planes de mantenimiento mensuales que incluyen actualizaciones de contenido, optimización continua y soporte técnico. También realizamos análisis periódicos de rendimiento para identificar oportunidades de mejora y maximizar tus conversiones a largo plazo.",
+      question: t("faq.q4.question"),
+      answer: t("faq.q4.answer"),
     },
     {
-      question: "¿Cómo miden el éxito de una landing page?",
-      answer:
-        "Medimos el éxito a través de métricas clave como tasa de conversión, tiempo en página, tasa de rebote y retorno de inversión. Implementamos herramientas de análisis avanzadas para rastrear el comportamiento de los usuarios y optimizar continuamente el rendimiento de tu landing page.",
+      question: t("faq.q5.question"),
+      answer: t("faq.q5.answer"),
     },
   ]
 

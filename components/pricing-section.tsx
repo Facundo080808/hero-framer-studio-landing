@@ -4,8 +4,10 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Check } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function PricingSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -32,49 +34,49 @@ export function PricingSection() {
 
   const plans = [
     {
-      name: "Esencial",
-      description: "Para profesionales independientes",
+      name: t("pricing.plan1.name"),
+      description: t("pricing.plan1.description"),
       price: "1,499",
       features: [
-        "1 Landing Page",
-        "Diseño responsive",
-        "Copywriting persuasivo",
-        "Formulario de contacto",
-        "Optimización SEO básica",
-        "Entrega en 7 días",
+        t("pricing.plan1.features.1"),
+        t("pricing.plan1.features.2"),
+        t("pricing.plan1.features.3"),
+        t("pricing.plan1.features.4"),
+        t("pricing.plan1.features.5"),
+        t("pricing.plan1.features.6"),
       ],
       popular: false,
     },
     {
-      name: "Profesional",
-      description: "Para pequeñas empresas",
+      name: t("pricing.plan2.name"),
+      description: t("pricing.plan2.description"),
       price: "2,499",
       features: [
-        "1 Landing Page",
-        "Diseño responsive premium",
-        "Copywriting avanzado",
-        "Integración con CRM",
-        "Animaciones personalizadas",
-        "Optimización SEO completa",
-        "A/B Testing",
-        "Entrega en 10 días",
+        t("pricing.plan2.features.1"),
+        t("pricing.plan2.features.2"),
+        t("pricing.plan2.features.3"),
+        t("pricing.plan2.features.4"),
+        t("pricing.plan2.features.5"),
+        t("pricing.plan2.features.6"),
+        t("pricing.plan2.features.7"),
+        t("pricing.plan2.features.8"),
       ],
       popular: true,
     },
     {
-      name: "Premium",
-      description: "Para medianas empresas",
+      name: t("pricing.plan3.name"),
+      description: t("pricing.plan3.description"),
       price: "3,999",
       features: [
-        "1 Landing Page compleja",
-        "Diseño responsive premium+",
-        "Copywriting por expertos",
-        "Integraciones avanzadas",
-        "Animaciones personalizadas",
-        "Optimización SEO avanzada",
-        "A/B Testing múltiple",
-        "Análisis de conversión",
-        "Entrega en 14 días",
+        t("pricing.plan3.features.1"),
+        t("pricing.plan3.features.2"),
+        t("pricing.plan3.features.3"),
+        t("pricing.plan3.features.4"),
+        t("pricing.plan3.features.5"),
+        t("pricing.plan3.features.6"),
+        t("pricing.plan3.features.7"),
+        t("pricing.plan3.features.8"),
+        t("pricing.plan3.features.9"),
       ],
       popular: false,
     },
@@ -93,10 +95,10 @@ export function PricingSection() {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white"
           >
-            Planes que se adaptan a tu negocio
+            {t("pricing.title")}
           </motion.h2>
           <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Soluciones a medida para maximizar tus conversiones, sin importar el tamaño de tu empresa.
+            {t("pricing.subtitle")}
           </motion.p>
         </motion.div>
 
@@ -116,7 +118,7 @@ export function PricingSection() {
               } overflow-hidden`}
             >
               {plan.popular && (
-                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">Más popular</div>
+                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">{t("pricing.popular_label")}</div>
               )}
 
               <div className="p-8">
@@ -144,7 +146,7 @@ export function PricingSection() {
                       : "bg-primary hover:bg-primary/90 text-white"
                   }`}
                 >
-                  Seleccionar plan
+                  {t("pricing.button")}
                 </Button>
               </div>
             </motion.div>

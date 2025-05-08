@@ -4,33 +4,38 @@ import { useRef, useState } from "react"
 import Image from "next/image"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function TestimonialsSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const testimonials = [
     {
-      name: "Carlos Rodríguez",
-      company: "TechSolutions Inc.",
+      name: t("testimonials.item1.name"),
+      company: t("testimonials.item1.company"),
       image: "/placeholder.svg?height=80&width=80",
-      text: "Trabajar con Hero&Framer Studio fue una experiencia excepcional. Entendieron perfectamente nuestras necesidades y crearon una landing page que superó todas nuestras expectativas. Las conversiones aumentaron un 45% en el primer mes.",
-      result: "45% más conversiones",
+      text: t("testimonials.item1.text"),
+      result: t("testimonials.item1.result"),
+      alt: t("testimonials.item1.alt"),
     },
     {
-      name: "Laura Martínez",
-      company: "EcoFriendly",
+      name: t("testimonials.item2.name"),
+      company: t("testimonials.item2.company"),
       image: "/placeholder.svg?height=80&width=80",
-      text: "Nuestra campaña de lead magnet fue un éxito rotundo gracias a la landing page diseñada por Hero&Framer Studio. El diseño atractivo y el copywriting persuasivo nos ayudaron a captar más de 300 leads cualificados en una semana.",
-      result: "320 leads en 1 semana",
+      text: t("testimonials.item2.text"),
+      result: t("testimonials.item2.result"),
+      alt: t("testimonials.item2.alt"),
     },
     {
-      name: "Miguel Sánchez",
-      company: "FinanceGrow",
+      name: t("testimonials.item3.name"),
+      company: t("testimonials.item3.company"),
       image: "/placeholder.svg?height=80&width=80",
-      text: "La atención al detalle y el enfoque estratégico de Hero&Framer Studio marcaron la diferencia en nuestro proyecto. La landing page no solo es visualmente impresionante, sino que también convierte a un nivel que nunca habíamos visto antes.",
-      result: "67% más tiempo en página",
+      text: t("testimonials.item3.text"),
+      result: t("testimonials.item3.result"),
+      alt: t("testimonials.item3.alt"),
     },
   ]
 
@@ -91,10 +96,10 @@ export function TestimonialsSection() {
             variants={itemVariants}
             className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white"
           >
-            Lo que dicen nuestros clientes
+            {t("testimonials.title")}
           </motion.h2>
           <motion.p variants={itemVariants} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Historias reales de clientes que transformaron sus resultados con nuestras landing pages.
+            {t("testimonials.subtitle")}
           </motion.p>
         </motion.div>
 
@@ -123,7 +128,7 @@ export function TestimonialsSection() {
                 <div className="flex-shrink-0">
                   <Image
                     src={testimonials[currentIndex].image || "/placeholder.svg"}
-                    alt={testimonials[currentIndex].name}
+                    alt={testimonials[currentIndex].alt}
                     width={80}
                     height={80}
                     className="rounded-full border-4 border-secondary/20"
@@ -155,7 +160,7 @@ export function TestimonialsSection() {
               <button
                 onClick={prevTestimonial}
                 className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-                aria-label="Testimonio anterior"
+                aria-label={t("testimonials.prev_button")}
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -168,7 +173,7 @@ export function TestimonialsSection() {
                     className={`w-3 h-3 rounded-full ${
                       index === currentIndex ? "bg-secondary" : "bg-muted-foreground/30"
                     }`}
-                    aria-label={`Ir al testimonio ${index + 1}`}
+                    aria-label={t("testimonials.nav_button").replace("{index}", (index + 1).toString())}
                   />
                 ))}
               </div>
@@ -176,7 +181,7 @@ export function TestimonialsSection() {
               <button
                 onClick={nextTestimonial}
                 className="p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-                aria-label="Siguiente testimonio"
+                aria-label={t("testimonials.next_button")}
               >
                 <ChevronRight className="h-5 w-5" />
               </button>

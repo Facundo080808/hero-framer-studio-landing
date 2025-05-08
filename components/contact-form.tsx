@@ -37,44 +37,44 @@ export function ContactForm() {
   const plans: Plan[] = [
     {
       id: "esencial",
-      name: "Esencial",
+      name: t("contact.plan1.name"),
       price: "1,499",
-      description: "Para profesionales independientes",
+      description: t("contact.plan1.description"),
     },
     {
       id: "profesional",
-      name: "Profesional",
+      name: t("contact.plan2.name"),
       price: "2,499",
-      description: "Para pequeñas empresas",
+      description: t("contact.plan2.description"),
     },
     {
       id: "premium",
-      name: "Premium",
+      name: t("contact.plan3.name"),
       price: "3,999",
-      description: "Para medianas empresas",
+      description: t("contact.plan3.description"),
     },
   ]
 
   const steps = [
     {
-      title: "¿Cómo te llamas?",
+      title: t("contact.step1.title"),
       field: "name",
       type: "text",
-      placeholder: "Tu nombre completo",
+      placeholder: t("contact.step1.placeholder"),
       validate: (value: string) => value.trim().length > 0,
     },
     {
-      title: "¿Cuál es tu correo electrónico?",
+      title: t("contact.step2.title"),
       field: "email",
       type: "email",
-      placeholder: "tu@email.com",
+      placeholder: t("contact.step2.placeholder"),
       validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
     },
     {
-      title: "¿Para qué empresa trabajas?",
+      title: t("contact.step3.title"),
       field: "company",
       type: "text",
-      placeholder: "Nombre de tu empresa",
+      placeholder: t("contact.step3.placeholder"),
       validate: (value: string) => value.trim().length > 0,
     },
     {
@@ -85,17 +85,17 @@ export function ContactForm() {
       validate: () => true, // Campo opcional
     },
     {
-      title: "¿Qué plan te interesa?",
+      title: t("contact.step5.title"),
       field: "plan",
       type: "radio",
       options: plans,
       validate: (value: string) => value.trim().length > 0,
     },
     {
-      title: "¿Algo más que quieras contarnos?",
+      title: t("contact.step6.title"),
       field: "message",
       type: "textarea",
-      placeholder: "Cuéntanos más sobre tu proyecto...",
+      placeholder: t("contact.step6.placeholder"),
       validate: () => true, // Optional field
     },
   ]
@@ -155,10 +155,10 @@ export function ContactForm() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white">
-            ¿Listo para empezar tu proyecto?
+            {t("contact.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Cuéntanos sobre tu proyecto y te ayudaremos a elegir la mejor solución para tus necesidades.
+            {t("contact.subtitle")}
           </p>
         </div>
 
@@ -239,7 +239,7 @@ export function ContactForm() {
                     {step > 0 ? (
                       <Button variant="outline" onClick={handlePrev} className="flex items-center">
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Anterior
+                        {t("contact.button.prev")}
                       </Button>
                     ) : (
                       <div></div>
@@ -253,15 +253,15 @@ export function ContactForm() {
                       }
                     >
                       {isSubmitting ? (
-                        "Enviando..."
+                        t("contact.button.submitting")
                       ) : step === steps.length - 1 ? (
                         <>
-                          Enviar
+                          {t("contact.button.submit")}
                           <Send className="ml-2 h-4 w-4" />
                         </>
                       ) : (
                         <>
-                          Siguiente
+                          {t("contact.button.next")}
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </>
                       )}
@@ -280,10 +280,8 @@ export function ContactForm() {
                 <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-secondary/10 mb-6">
                   <CheckCircle className="h-10 w-10 text-secondary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-primary dark:text-white">¡Mensaje enviado con éxito!</h3>
-                <p className="text-muted-foreground mb-8">
-                  Gracias por contactarnos. Nos pondremos en contacto contigo lo antes posible.
-                </p>
+                <h3 className="text-2xl font-bold mb-4 text-primary dark:text-white">{t("contact.success.title")}</h3>
+                <p className="text-muted-foreground mb-8">{t("contact.success.message")}</p>
                 <Button
                   onClick={() => {
                     setStep(0)
@@ -299,7 +297,7 @@ export function ContactForm() {
                   }}
                   className="bg-secondary hover:bg-secondary/90 text-white"
                 >
-                  Enviar otro mensaje
+                  {t("contact.button.reset")}
                 </Button>
               </motion.div>
             </div>

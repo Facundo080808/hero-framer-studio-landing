@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/contexts/language-context"
 
 export function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     // Check if user has already accepted cookies
@@ -38,19 +40,18 @@ export function CookieConsent() {
         >
           <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between">
             <p className="text-sm text-muted-foreground mb-4 sm:mb-0 sm:mr-4">
-              Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Al continuar navegando, aceptas
-              nuestra{" "}
+              {t("cookie_consent.message")}{" "}
               <a href="#" className="underline hover:text-primary">
-                política de cookies
+                {t("cookie_consent.policy")}
               </a>
               .
             </p>
             <div className="flex space-x-4">
               <Button variant="outline" size="sm" onClick={() => setIsVisible(false)}>
-                Rechazar
+                {t("cookie_consent.reject")}
               </Button>
               <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-white" onClick={acceptCookies}>
-                Aceptar
+                {t("cookie_consent.accept")}
               </Button>
             </div>
           </div>

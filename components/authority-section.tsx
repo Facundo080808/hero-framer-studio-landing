@@ -6,8 +6,10 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { useCountUp } from "react-countup"
 import { ArrowUpRight, BarChart3, LineChart, TrendingUp, Users } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
 export function AuthoritySection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
   const { scrollYProgress } = useScroll({
@@ -91,13 +93,13 @@ export function AuthoritySection() {
         >
           <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-end gap-2 mb-2">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary dark:text-white">
-              Expertos en <span className="text-secondary">resultados</span>
+              {t("authority.title")} <span className="text-secondary">{t("authority.title_highlight")}</span>
             </h2>
             <div className="h-px flex-grow bg-border dark:bg-slate-700 mb-4"></div>
           </motion.div>
 
           <motion.p variants={itemVariants} className="text-xl text-muted-foreground max-w-3xl mb-4">
-            Diseñamos landing pages estratégicas que maximizan conversiones y generan resultados medibles.
+            {t("authority.subtitle")}
           </motion.p>
 
           <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
@@ -120,11 +122,9 @@ export function AuthoritySection() {
                 <div className="text-5xl font-bold text-secondary mb-2" ref={conversionsRef}>
                   0%
                 </div>
-                <p className="text-lg text-muted-foreground">de aumento en conversiones promedio</p>
+                <p className="text-lg text-muted-foreground">{t("authority.stat1.title")}</p>
                 <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground">
-                    Superamos consistentemente los benchmarks de la industria con estrategias de conversión avanzadas.
-                  </p>
+                  <p className="text-sm text-muted-foreground">{t("authority.stat1.description")}</p>
                 </div>
               </div>
             </div>
@@ -148,12 +148,9 @@ export function AuthoritySection() {
                 <div className="text-5xl font-bold text-secondary mb-2" ref={landingPagesRef}>
                   0
                 </div>
-                <p className="text-lg text-muted-foreground">landing pages creadas</p>
+                <p className="text-lg text-muted-foreground">{t("authority.stat2.title")}</p>
                 <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground">
-                    Experiencia comprobada en diversos sectores, desde SaaS y startups hasta e-commerce y servicios
-                    profesionales.
-                  </p>
+                  <p className="text-sm text-muted-foreground">{t("authority.stat2.description")}</p>
                 </div>
               </div>
             </div>
@@ -177,11 +174,9 @@ export function AuthoritySection() {
                 <div className="text-5xl font-bold text-secondary mb-2" ref={clientsRef}>
                   0%
                 </div>
-                <p className="text-lg text-muted-foreground">de clientes que aumentan sus ventas</p>
+                <p className="text-lg text-muted-foreground">{t("authority.stat3.title")}</p>
                 <div className="mt-4 pt-4 border-t border-border">
-                  <p className="text-sm text-muted-foreground">
-                    Nuestro enfoque orientado a resultados garantiza un impacto real y medible en tu negocio.
-                  </p>
+                  <p className="text-sm text-muted-foreground">{t("authority.stat3.description")}</p>
                 </div>
               </div>
             </div>
@@ -197,17 +192,14 @@ export function AuthoritySection() {
           <motion.div variants={itemVariants} className="order-2 lg:order-1">
             <div className="inline-flex items-center px-4 py-1.5 mb-4 text-sm font-medium text-secondary bg-secondary/10 rounded-full">
               <span className="flex h-2 w-2 rounded-full bg-secondary mr-2"></span>
-              <span>Casos de éxito verificados</span>
+              <span>{t("authority.success_badge")}</span>
             </div>
 
             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white">
-              Transformamos métricas en <span className="text-secondary">crecimiento real</span>
+              {t("authority.success_title")} <span className="text-secondary">{t("authority.title_highlight")}</span>
             </h3>
 
-            <p className="text-lg text-muted-foreground mb-4">
-              Nuestras landing pages impulsan el crecimiento sostenible con estrategias probadas en startups de
-              YCombinator y empresas SaaS.
-            </p>
+            <p className="text-lg text-muted-foreground mb-4">{t("authority.success_subtitle")}</p>
 
             <div className="space-y-4 mb-4">
               <div className="flex gap-4">
@@ -215,10 +207,8 @@ export function AuthoritySection() {
                   <LineChart className="h-6 w-6 text-secondary" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold mb-1">Optimización continua</h4>
-                  <p className="text-muted-foreground">
-                    Mejoramos constantemente el rendimiento con pruebas A/B y análisis de datos.
-                  </p>
+                  <h4 className="text-lg font-semibold mb-1">{t("authority.feature1.title")}</h4>
+                  <p className="text-muted-foreground">{t("authority.feature1.description")}</p>
                 </div>
               </div>
 
@@ -227,16 +217,14 @@ export function AuthoritySection() {
                   <Users className="h-6 w-6 text-secondary" />
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold mb-1">Enfoque centrado en el usuario</h4>
-                  <p className="text-muted-foreground">
-                    Diseñamos experiencias que conectan con tu audiencia y generan acción.
-                  </p>
+                  <h4 className="text-lg font-semibold mb-1">{t("authority.feature2.title")}</h4>
+                  <p className="text-muted-foreground">{t("authority.feature2.description")}</p>
                 </div>
               </div>
             </div>
 
             <Link href="#" className="inline-flex items-center text-secondary font-medium hover:underline">
-              Ver todos los casos de éxito
+              {t("authority.cta")}
               <ArrowUpRight className="ml-1 h-4 w-4" />
             </Link>
           </motion.div>
@@ -246,7 +234,7 @@ export function AuthoritySection() {
               <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-2/3 h-auto z-10">
                 <Image
                   src="/placeholder.svg?height=300&width=400"
-                  alt="Dashboard de resultados"
+                  alt={t("authority.image1.alt")}
                   width={400}
                   height={300}
                   className="w-full h-auto rounded-lg shadow-xl border border-white/20"
@@ -256,7 +244,7 @@ export function AuthoritySection() {
               <motion.div style={{ y: y2 }} className="absolute bottom-0 right-0 w-2/3 h-auto z-20">
                 <Image
                   src="/placeholder.svg?height=300&width=400"
-                  alt="Análisis de conversión"
+                  alt={t("authority.image2.alt")}
                   width={400}
                   height={300}
                   className="w-full h-auto rounded-lg shadow-xl border border-white/20"
@@ -280,7 +268,7 @@ export function AuthoritySection() {
                   </div>
                   <div className="mt-4 pt-4 border-t border-border">
                     <div className="flex justify-between items-center">
-                      <div className="text-sm font-medium">Conversión</div>
+                      <div className="text-sm font-medium">{t("authority.conversion_label")}</div>
                       <div className="text-sm font-bold text-secondary">+93%</div>
                     </div>
                   </div>

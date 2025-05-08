@@ -3,8 +3,10 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function Footer() {
+  const { t } = useLanguage()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -23,106 +25,105 @@ export function Footer() {
             </Link>
 
             <p className="text-white/80 mb-6">
-              Agencia especializada en diseño de landing pages convertibles y lead magnets. Transformamos visitantes en
-              clientes con diseños estratégicos y persuasivos.
+              {t("footer.description")}
             </p>
 
             <div className="flex space-x-4">
               <Link href="#" className="text-white/80 hover:text-white transition-colors">
                 <Facebook size={20} />
-                <span className="sr-only">Facebook</span>
+                <span className="sr-only">{t("footer.social.facebook")}</span>
               </Link>
               <Link href="#" className="text-white/80 hover:text-white transition-colors">
                 <Twitter size={20} />
-                <span className="sr-only">Twitter</span>
+                <span className="sr-only">{t("footer.social.twitter")}</span>
               </Link>
               <Link href="#" className="text-white/80 hover:text-white transition-colors">
                 <Instagram size={20} />
-                <span className="sr-only">Instagram</span>
+                <span className="sr-only">{t("footer.social.instagram")}</span>
               </Link>
               <Link href="#" className="text-white/80 hover:text-white transition-colors">
                 <Linkedin size={20} />
-                <span className="sr-only">LinkedIn</span>
+                <span className="sr-only">{t("footer.social.linkedin")}</span>
               </Link>
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Enlaces rápidos</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("footer.quick_links")}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="#servicios" className="text-white/80 hover:text-white transition-colors">
-                  Servicios
+                  {t("footer.quick_links.services")}
                 </Link>
               </li>
               <li>
                 <Link href="#portafolio" className="text-white/80 hover:text-white transition-colors">
-                  Portafolio
+                  {t("footer.quick_links.portfolio")}
                 </Link>
               </li>
               <li>
                 <Link href="#proceso" className="text-white/80 hover:text-white transition-colors">
-                  Proceso
+                  {t("footer.quick_links.process")}
                 </Link>
               </li>
               <li>
                 <Link href="#testimonios" className="text-white/80 hover:text-white transition-colors">
-                  Testimonios
+                  {t("footer.quick_links.testimonials")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Blog
+                  {t("footer.quick_links.blog")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Servicios</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("footer.services")}</h3>
             <ul className="space-y-3">
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Landing Page de Ventas
+                  {t("footer.services.sales")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Landing Page Lead Magnet
+                  {t("footer.services.lead_magnet")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Landing Page Evento
+                  {t("footer.services.event")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Optimización de Conversión
+                  {t("footer.services.conversion")}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-white/80 hover:text-white transition-colors">
-                  Copywriting Persuasivo
+                  {t("footer.services.copywriting")}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contacto</h3>
+            <h3 className="text-lg font-semibold mb-6">{t("footer.contact")}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-3 mt-1 flex-shrink-0 text-accent" />
-                <span className="text-white/80">Calle Innovación 123, 28001 Madrid, España</span>
+                <span className="text-white/80">{t("footer.contact.address")}</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-3 flex-shrink-0 text-accent" />
-                <span className="text-white/80">+34 91 123 45 67</span>
+                <span className="text-white/80">{t("footer.contact.phone")}</span>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-3 flex-shrink-0 text-accent" />
-                <span className="text-white/80">info@heroframer.com</span>
+                <span className="text-white/80">{t("footer.contact.email")}</span>
               </li>
             </ul>
           </div>
@@ -130,18 +131,18 @@ export function Footer() {
 
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm mb-4 md:mb-0">
-            &copy; {currentYear} Hero&Framer Studio. Todos los derechos reservados.
+            {t("footer.copyright").replace("{currentYear}", currentYear.toString())}
           </p>
 
           <div className="flex space-x-6">
             <Link href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-              Política de Privacidad
+              {t("footer.privacy")}
             </Link>
             <Link href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-              Términos y Condiciones
+              {t("footer.terms")}
             </Link>
             <Link href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-              Cookies
+              {t("footer.cookies")}
             </Link>
           </div>
         </div>

@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion"
 import { MessageCircle } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 export function WhatsAppButton() {
+  const { t } = useLanguage()
+
   return (
     <motion.a
       href="https://wa.me/34911234567"
@@ -17,7 +20,7 @@ export function WhatsAppButton() {
       transition={{ delay: 1 }}
     >
       <MessageCircle size={24} />
-      <span className="sr-only">Contactar por WhatsApp</span>
+      <span className="sr-only">{t("whatsapp.accessibility")}</span>
     </motion.a>
   )
 }

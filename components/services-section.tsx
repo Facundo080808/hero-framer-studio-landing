@@ -6,8 +6,10 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ShoppingBag, Download, Calendar, CheckCircle, Zap, BarChart } from "lucide-react"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/language-context"
 
 export function ServicesSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -47,56 +49,53 @@ export function ServicesSection() {
 
   const services = [
     {
-      title: "Landing Page de Ventas",
-      description:
-        "Diseñada para convertir visitantes en clientes, con un enfoque en la persuasión y el cierre de ventas.",
+      title: t("services.card1.title"),
+      description: t("services.card1.description"),
       icon: <ShoppingBag className="h-10 w-10 text-white" />,
       image: "/placeholder.svg?height=300&width=400",
       features: [
-        "Copywriting persuasivo orientado a ventas",
-        "Diseño de alta conversión",
-        "Elementos de confianza y social proof",
-        "Optimización para SEO y PPC",
+        t("services.card1.feature1"),
+        t("services.card1.feature2"),
+        t("services.card1.feature3"),
+        t("services.card1.feature4"),
       ],
       caseStudy: {
-        client: "TechSolutions Inc.",
-        result: "+45% conversiones",
+        client: t("services.card1.case_study.client"),
+        result: t("services.card1.case_study.result"),
       },
       color: "from-secondary to-purple-700",
     },
     {
-      title: "Landing Page Lead Magnet",
-      description:
-        "Optimizada para capturar leads de calidad a través de contenido valioso y formularios estratégicos.",
+      title: t("services.card2.title"),
+      description: t("services.card2.description"),
       icon: <Download className="h-10 w-10 text-white" />,
       image: "/placeholder.svg?height=300&width=400",
       features: [
-        "Formularios optimizados para conversión",
-        "Propuestas de valor claras y atractivas",
-        "Integración con CRM y email marketing",
-        "Seguimiento y nurturing automatizado",
+        t("services.card2.feature1"),
+        t("services.card2.feature2"),
+        t("services.card2.feature3"),
+        t("services.card2.feature4"),
       ],
       caseStudy: {
-        client: "EcoFriendly",
-        result: "320 leads en 1 semana",
+        client: t("services.card2.case_study.client"),
+        result: t("services.card2.case_study.result"),
       },
       color: "from-accent to-teal-600",
     },
     {
-      title: "Landing Page Evento",
-      description:
-        "Perfecta para promocionar eventos y maximizar registros con diseño enfocado en la acción inmediata.",
+      title: t("services.card3.title"),
+      description: t("services.card3.description"),
       icon: <Calendar className="h-10 w-10 text-white" />,
       image: "/placeholder.svg?height=300&width=400",
       features: [
-        "Cuenta regresiva y elementos de urgencia",
-        "Agenda y detalles del evento",
-        "Perfiles de speakers y participantes",
-        "Integración con plataformas de eventos",
+        t("services.card3.feature1"),
+        t("services.card3.feature2"),
+        t("services.card3.feature3"),
+        t("services.card3.feature4"),
       ],
       caseStudy: {
-        client: "EventMasters",
-        result: "98% de registros completados",
+        client: t("services.card3.case_study.client"),
+        result: t("services.card3.case_study.result"),
       },
       color: "from-primary to-blue-800",
     },
@@ -119,37 +118,36 @@ export function ServicesSection() {
             className="inline-flex items-center px-4 py-1.5 mb-6 text-sm font-medium text-secondary bg-secondary/10 rounded-full"
           >
             <span className="flex h-2 w-2 rounded-full bg-secondary mr-2"></span>
-            <span>Soluciones Estratégicas</span>
+            <span>{t("services.subtitle")}</span>
           </motion.div>
 
           <motion.h2
             variants={itemVariants}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary dark:text-white"
           >
-            Landing pages para <span className="text-secondary">cualquier objetivo</span>
+            {t("services.title")}
           </motion.h2>
 
           <motion.p variants={itemVariants} className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Diseñamos landing pages estratégicas que convierten visitantes en clientes, con un enfoque científico basado
-            en psicología de conversión y análisis de datos.
+            {t("services.description")}
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-4 mb-16">
             <div className="flex items-center text-sm text-muted-foreground">
               <CheckCircle className="mr-2 h-4 w-4 text-secondary" />
-              <span>Diseño UX/UI avanzado</span>
+              <span>{t("services.feature1")}</span>
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <CheckCircle className="mr-2 h-4 w-4 text-secondary" />
-              <span>Copywriting persuasivo</span>
+              <span>{t("services.feature2")}</span>
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <CheckCircle className="mr-2 h-4 w-4 text-secondary" />
-              <span>Optimización para conversión</span>
+              <span>{t("services.feature3")}</span>
             </div>
             <div className="flex items-center text-sm text-muted-foreground">
               <CheckCircle className="mr-2 h-4 w-4 text-secondary" />
-              <span>Análisis de resultados</span>
+              <span>{t("services.feature4")}</span>
             </div>
           </motion.div>
         </motion.div>
@@ -191,7 +189,7 @@ export function ServicesSection() {
                 <div className="mb-6">
                   <Image
                     src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    alt={t(`services.card${index + 1}.alt`)}
                     width={400}
                     height={300}
                     className="w-full h-auto rounded-lg object-cover transition-transform duration-500 group-hover:scale-105"
@@ -219,7 +217,7 @@ export function ServicesSection() {
                 </div>
 
                 <Button className="w-full bg-secondary hover:bg-secondary/90 text-white group">
-                  <span>Ver detalles</span>
+                  <span>{t("services.button")}</span>
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
               </div>
@@ -236,13 +234,13 @@ export function ServicesSection() {
           <motion.div variants={itemVariants} className="inline-block p-1 bg-muted rounded-full mb-8">
             <div className="flex items-center gap-2 px-6 py-2 bg-white dark:bg-slate-800 rounded-full">
               <Zap className="h-5 w-5 text-secondary" />
-              <span className="text-sm font-medium">¿Necesitas una solución personalizada?</span>
+              <span>{t("services.custom_solution")}</span>
             </div>
           </motion.div>
 
           <motion.div variants={itemVariants}>
             <Link href="#" className="inline-flex items-center text-lg font-medium text-secondary hover:underline">
-              Agenda una consulta estratégica gratuita
+              {t("services.cta")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </motion.div>

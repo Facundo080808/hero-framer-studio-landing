@@ -5,8 +5,10 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle, MousePointer, Zap } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
 export function CtaSection() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
 
@@ -84,40 +86,46 @@ export function CtaSection() {
           <motion.div variants={itemVariants} className="text-white">
             <div className="inline-flex items-center px-4 py-1.5 mb-6 text-sm font-medium bg-white/10 backdrop-blur-sm rounded-full">
               <Zap className="mr-2 h-4 w-4" />
-              <span>Impulsa tu negocio ahora</span>
+              <span>{t("cta.label")}</span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              ¿Listo para <span className="text-accent">multiplicar</span> tus conversiones?
-            </h2>
+            <h2
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+              dangerouslySetInnerHTML={{
+                __html: t("cta.title").replace(
+                  t("cta.title_highlight"),
+                  `<span class="text-accent">${t("cta.title_highlight")}</span>`
+                ),
+              }}
+            ></h2>
+
 
             <p className="text-xl text-white/90 mb-8 max-w-xl">
-              Agenda una consulta estratégica gratuita y descubre cómo podemos transformar tu landing page en una
-              máquina de conversión que genere resultados excepcionales.
+              {t("cta.subtitle")}
             </p>
 
             <div className="space-y-4 mb-8">
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-accent mr-3 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-lg">Análisis de tu landing page actual</h4>
-                  <p className="text-white/80">Identificamos oportunidades de mejora y puntos débiles.</p>
+                  <h4 className="font-semibold text-lg">{t("cta.feature1.title")}</h4>
+                  <p className="text-white/80">{t("cta.feature1.description")}</p>
                 </div>
               </div>
 
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-accent mr-3 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-lg">Estrategia personalizada</h4>
-                  <p className="text-white/80">Desarrollamos un plan adaptado a tus objetivos específicos.</p>
+                  <h4 className="font-semibold text-lg">{t("cta.feature2.title")}</h4>
+                  <p className="text-white/80">{t("cta.feature2.description")}</p>
                 </div>
               </div>
 
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-accent mr-3 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-lg">Proyección de resultados</h4>
-                  <p className="text-white/80">Estimamos el impacto potencial en tus métricas clave.</p>
+                  <h4 className="font-semibold text-lg">{t("cta.feature3.title")}</h4>
+                  <p className="text-white/80">{t("cta.feature3.description")}</p>
                 </div>
               </div>
             </div>
@@ -129,12 +137,12 @@ export function CtaSection() {
               className="inline-block"
             >
               <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-7 h-auto group">
-                Reservar Consulta Estratégica
+                {t("cta.button")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>
 
-            <p className="mt-4 text-sm text-white/70">Sin compromiso. Plazas limitadas cada semana.</p>
+            <p className="mt-4 text-sm text-white/70">{t("cta.note")}</p>
           </motion.div>
 
           <motion.div variants={itemVariants} className="relative">
@@ -146,7 +154,7 @@ export function CtaSection() {
                     <div className="h-3 w-3 rounded-full bg-yellow-500 mr-2" />
                     <div className="h-3 w-3 rounded-full bg-green-500" />
                   </div>
-                  <div className="text-white/80 text-sm">hero-framer-studio.com</div>
+                  <div className="text-white/80 text-sm">{t("cta.domain")}</div>
                 </div>
 
                 <div className="relative">
@@ -177,8 +185,8 @@ export function CtaSection() {
 
                 <div className="mt-6 p-4 bg-white/10 rounded-lg">
                   <div className="flex items-center justify-between">
-                    <div className="text-white font-medium">Tasa de conversión</div>
-                    <div className="text-accent font-bold">+93%</div>
+                    <div className="text-white font-medium">{t("cta.conversion_label")}</div>
+                    <div className="text-accent font-bold">{t("cta.conversion_value")}</div>
                   </div>
                   <div className="mt-2 w-full h-2 bg-white/20 rounded-full overflow-hidden">
                     <motion.div
