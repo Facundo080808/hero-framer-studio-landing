@@ -142,7 +142,7 @@ export function HeroSection() {
             variants={itemVariants}
             className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent"
           >
-            {t("hero.title")} <span className="italic">visitantes</span> en <br className="hidden md:block" />
+            {t("hero.title")}  <br className="hidden md:block" />
             <span className="relative inline-block">
               <span className="text-primary dark:text-white">{displayText}</span>
               <span className="animate-pulse">|</span>
