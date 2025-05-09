@@ -33,49 +33,49 @@ export function PortfolioSection() {
   }
 
   const portfolioItems = [
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item1.client"),
-      type: t("portfolio.item1.type"),
-      result: t("portfolio.item1.result"),
-      alt: t("portfolio.item1.alt"),
-    },
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item2.client"),
-      type: t("portfolio.item2.type"),
-      result: t("portfolio.item2.result"),
-      alt: t("portfolio.item2.alt"),
-    },
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item3.client"),
-      type: t("portfolio.item3.type"),
-      result: t("portfolio.item3.result"),
-      alt: t("portfolio.item3.alt"),
-    },
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item4.client"),
-      type: t("portfolio.item4.type"),
-      result: t("portfolio.item4.result"),
-      alt: t("portfolio.item4.alt"),
-    },
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item5.client"),
-      type: t("portfolio.item5.type"),
-      result: t("portfolio.item5.result"),
-      alt: t("portfolio.item5.alt"),
-    },
-    {
-      image: "/placeholder.svg?height=400&width=600",
-      client: t("portfolio.item6.client"),
-      type: t("portfolio.item6.type"),
-      result: t("portfolio.item6.result"),
-      alt: t("portfolio.item6.alt"),
-    },
-  ]
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item1.client"),
+    type: t("portfolio.item1.type"),
+    result: t("portfolio.item1.result"),
+    alt: t("portfolio.item1.alt"),
+  },
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item2.client"),
+    type: t("portfolio.item2.type"),
+    result: t("portfolio.item2.result"),
+    alt: t("portfolio.item2.alt"),
+  },
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item3.client"),
+    type: t("portfolio.item3.type"),
+    result: t("portfolio.item3.result"),
+    alt: t("portfolio.item3.alt"),
+  },
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item4.client"),
+    type: t("portfolio.item4.type"),
+    result: t("portfolio.item4.result"),
+    alt: t("portfolio.item4.alt"),
+  },
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item5.client"),
+    type: t("portfolio.item5.type"),
+    result: t("portfolio.item5.result"),
+    alt: t("portfolio.item5.alt"),
+  },
+  {
+    image: "/placeholder.svg",
+    client: t("portfolio.item6.client"),
+    type: t("portfolio.item6.type"),
+    result: t("portfolio.item6.result"),
+    alt: t("portfolio.item6.alt"),
+  },
+]
 
   return (
     <section id="portafolio" ref={sectionRef} className="py-16 md:py-24">
