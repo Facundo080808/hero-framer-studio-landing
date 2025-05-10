@@ -63,7 +63,7 @@ export function ServicesSection() {
       title: t("services.card1.title"),
       description: t("services.card1.description"),
       icon: <ShoppingBag className="h-10 w-10 text-white" />,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/autority-seccion1.jpg",
       features: [
         t("services.card1.feature1"),
         t("services.card1.feature2"),
@@ -80,7 +80,7 @@ export function ServicesSection() {
       title: t("services.card2.title"),
       description: t("services.card2.description"),
       icon: <Download className="h-10 w-10 text-white" />,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/autority-seccion1.jpg",
       features: [
         t("services.card2.feature1"),
         t("services.card2.feature2"),
@@ -97,7 +97,7 @@ export function ServicesSection() {
       title: t("services.card3.title"),
       description: t("services.card3.description"),
       icon: <Calendar className="h-10 w-10 text-white" />,
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/autority-seccion1.jpg",
       features: [
         t("services.card3.feature1"),
         t("services.card3.feature2"),

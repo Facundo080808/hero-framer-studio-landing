@@ -33,49 +33,49 @@ export function PortfolioSection() {
   }
 
   const portfolioItems = [
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item1.client"),
-    type: t("portfolio.item1.type"),
-    result: t("portfolio.item1.result"),
-    alt: t("portfolio.item1.alt"),
-  },
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item2.client"),
-    type: t("portfolio.item2.type"),
-    result: t("portfolio.item2.result"),
-    alt: t("portfolio.item2.alt"),
-  },
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item3.client"),
-    type: t("portfolio.item3.type"),
-    result: t("portfolio.item3.result"),
-    alt: t("portfolio.item3.alt"),
-  },
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item4.client"),
-    type: t("portfolio.item4.type"),
-    result: t("portfolio.item4.result"),
-    alt: t("portfolio.item4.alt"),
-  },
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item5.client"),
-    type: t("portfolio.item5.type"),
-    result: t("portfolio.item5.result"),
-    alt: t("portfolio.item5.alt"),
-  },
-  {
-    image: "/placeholder.svg",
-    client: t("portfolio.item6.client"),
-    type: t("portfolio.item6.type"),
-    result: t("portfolio.item6.result"),
-    alt: t("portfolio.item6.alt"),
-  },
-]
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item1.client"),
+      type: t("portfolio.item1.type"),
+      result: t("portfolio.item1.result"),
+      alt: t("portfolio.item1.alt"),
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item2.client"),
+      type: t("portfolio.item2.type"),
+      result: t("portfolio.item2.result"),
+      alt: t("portfolio.item2.alt"),
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item3.client"),
+      type: t("portfolio.item3.type"),
+      result: t("portfolio.item3.result"),
+      alt: t("portfolio.item3.alt"),
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item4.client"),
+      type: t("portfolio.item4.type"),
+      result: t("portfolio.item4.result"),
+      alt: t("portfolio.item4.alt"),
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item5.client"),
+      type: t("portfolio.item5.type"),
+      result: t("portfolio.item5.result"),
+      alt: t("portfolio.item5.alt"),
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item6.client"),
+      type: t("portfolio.item6.type"),
+      result: t("portfolio.item6.result"),
+      alt: t("portfolio.item6.alt"),
+    },
+  ]
 
   return (
     <section id="portafolio" ref={sectionRef} className="py-16 md:py-24">
@@ -107,19 +107,19 @@ export function PortfolioSection() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="relative group overflow-hidden rounded-lg shadow-md"
+              className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <Image
                 src={item.image || "/placeholder.svg"}
                 alt={item.alt}
                 width={600}
                 height={400}
-                className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <h3 className="text-xl font-bold text-white mb-1">{item.client}</h3>
-                <p className="text-white/80 text-sm mb-2">{item.type}</p>
-                <div className="inline-block bg-accent/90 text-primary text-sm font-medium px-3 py-1 rounded-full">
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-primary/20 group-hover:from-primary/95 group-hover:to-primary/30 opacity-100 flex flex-col justify-end p-6 transition-all duration-300">
+                <h3 className="text-xl font-bold text-white mb-1 group-hover:text-white/90">{item.client}</h3>
+                <p className="text-white/80 text-sm mb-2 group-hover:text-white">{item.type}</p>
+                <div className="inline-block bg-accent/90 text-primary text-sm font-medium px-3 py-1 rounded-full group-hover:bg-accent">
                   {item.result}
                 </div>
               </div>
