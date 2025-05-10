@@ -138,11 +138,11 @@ export function ContactForm() {
   }
 
   // Scroll to form on step change
-  useEffect(() => {
-    if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
-  }, [step])
+  // useEffect(() => {
+  //   if (formRef.current) {
+  //     formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+  //   }
+  // }, [step])
 
   const variants = {
     hidden: { opacity: 0, x: 50 },
@@ -231,7 +231,7 @@ export function ContactForm() {
                       placeholder={steps[step].placeholder}
                       className="w-full text-lg py-6"
                       onKeyDown={handleKeyDown}
-                      autoFocus
+                      // autoFocus
                     />
                   )}
 

@@ -559,12 +559,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Función para cambiar el idioma y actualizar la URL
   const changeLanguage = (newLanguage: Language) => {
     setLanguage(newLanguage)
-
-    // Actualizar la URL con el código de idioma
+  
     if (pathname) {
-      const currentPath = pathname || "/"
-      const basePath = currentPath.replace(/^\/(es|pt)/, "")
-      router.push(`/${newLanguage}${basePath}`)
+      // Elimina solo el primer segmento de la ruta (código de idioma)
+      const basePath = pathname.replace(/^\/[^/]+/, '')
+      
+      // Redirige manteniendo la ruta original
+      router.push(`/${newLanguage}${basePath}`, { scroll: false })
     }
   }
 
