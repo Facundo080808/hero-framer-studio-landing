@@ -233,7 +233,7 @@ export function AuthoritySection() {
             <div className="relative h-[300px] w-full">
               <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-full max-w-[400px] h-auto z-10">
                 <Image
-                  src="/placeholder.svg"
+                  src="/autority-seccion1.jpg"
                   alt={t("authority.image1.alt")}
                   width={400}
                   height={300}
