@@ -21,13 +21,13 @@ export function AuthoritySection() {
   const y2 = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"])
   const y3 = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"])
 
-  // CountUp hooks for statistics
-  const conversionsRef = useRef(null)
-  const landingPagesRef = useRef(null)
-  const clientsRef = useRef(null)
+  // Crear IDs para usar en lugar de refs
+  const conversionsId = "conversions-counter"
+  const landingPagesId = "landing-pages-counter"
+  const clientsId = "clients-counter"
 
   useCountUp({
-    ref: conversionsRef,
+    ref: conversionsId, // Usar ID en lugar de ref
     end: 93,
     enableScrollSpy: true,
     scrollSpyDelay: 500,
@@ -36,7 +36,7 @@ export function AuthoritySection() {
   })
 
   useCountUp({
-    ref: landingPagesRef,
+    ref: landingPagesId, // Usar ID en lugar de ref
     end: 200,
     enableScrollSpy: true,
     scrollSpyDelay: 500,
@@ -45,7 +45,7 @@ export function AuthoritySection() {
   })
 
   useCountUp({
-    ref: clientsRef,
+    ref: clientsId, // Usar ID en lugar de ref
     end: 87,
     enableScrollSpy: true,
     scrollSpyDelay: 500,
@@ -119,7 +119,7 @@ export function AuthoritySection() {
                     />
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-secondary mb-2" ref={conversionsRef}>
+                <div id={conversionsId} className="text-5xl font-bold text-secondary mb-2">
                   0%
                 </div>
                 <p className="text-lg text-muted-foreground">{t("authority.stat1.title")}</p>
@@ -145,7 +145,7 @@ export function AuthoritySection() {
                     />
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-secondary mb-2" ref={landingPagesRef}>
+                <div id={landingPagesId} className="text-5xl font-bold text-secondary mb-2">
                   0
                 </div>
                 <p className="text-lg text-muted-foreground">{t("authority.stat2.title")}</p>
@@ -171,7 +171,7 @@ export function AuthoritySection() {
                     />
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-secondary mb-2" ref={clientsRef}>
+                <div id={clientsId} className="text-5xl font-bold text-secondary mb-2">
                   0%
                 </div>
                 <p className="text-lg text-muted-foreground">{t("authority.stat3.title")}</p>
@@ -230,20 +230,17 @@ export function AuthoritySection() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="order-1 lg:order-2 relative">
-            <div className="relative h-[400px] w-full">
-
-              <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-full max-w-[600px] h-auto z-10">
+            <div className="relative h-[300px] w-full">
+              <motion.div style={{ y: y1 }} className="absolute top-0 left-0 w-full max-w-[400px] h-auto z-10">
                 <Image
                   src="/placeholder.svg"
                   alt={t("authority.image1.alt")}
-                  width={600}
-                  height={400}
+                  width={400}
+                  height={300}
                   className="w-full h-auto object-cover rounded-lg shadow-xl border border-white/20"
                   layout="responsive"
                 />
               </motion.div>
-
-
 
               <motion.div
                 style={{ y: y3 }}
