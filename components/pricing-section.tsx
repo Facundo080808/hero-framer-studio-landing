@@ -80,6 +80,65 @@ export function PricingSection() {
       ],
       popular: false,
     },
+    {
+      name: t("pricing.plan4.name"),
+      description: t("pricing.plan4.description"),
+      price: "479",
+      features: [
+        t("pricing.plan4.features.1"),
+        t("pricing.plan4.features.2"),
+        t("pricing.plan4.features.3"),
+        t("pricing.plan4.features.4"),
+        t("pricing.plan4.features.5"),
+        t("pricing.plan4.features.6"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan5.name"),
+      description: t("pricing.plan5.description"),
+      price: "700",
+      features: [
+        t("pricing.plan5.features.1"),
+        t("pricing.plan5.features.2"),
+        t("pricing.plan5.features.3"),
+        t("pricing.plan5.features.4"),
+        t("pricing.plan5.features.5"),
+        t("pricing.plan5.features.6"),
+        t("pricing.plan5.features.7"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan6.name"),
+      description: t("pricing.plan6.description"),
+      price: "990",
+      features: [
+        t("pricing.plan6.features.1"),
+        t("pricing.plan6.features.2"),
+        t("pricing.plan6.features.3"),
+        t("pricing.plan6.features.4"),
+        t("pricing.plan6.features.5"),
+        t("pricing.plan6.features.6"),
+        t("pricing.plan6.features.7"),
+        t("pricing.plan6.features.8"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan7.name"),
+      description: t("pricing.plan7.description"),
+      price: "1,490",
+      features: [
+        t("pricing.plan7.features.1"),
+        t("pricing.plan7.features.2"),
+        t("pricing.plan7.features.3"),
+        t("pricing.plan7.features.4"),
+        t("pricing.plan7.features.5"),
+        t("pricing.plan7.features.6"),
+      ],
+      popular: false,
+    },
   ]
 
   return (
@@ -113,7 +172,7 @@ export function PricingSection() {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
+              className={`_above_ bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
                 plan.popular ? "border-secondary" : "border-border"
               } overflow-hidden`}
             >

@@ -105,13 +105,6 @@ export function CtaSection() {
             </p>
 
             <div className="space-y-4 mb-8">
-              <div className="flex items-start">
-                <CheckCircle className="h-6 w-6 text-accent mr-3 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-lg">{t("cta.feature1.title")}</h4>
-                  <p className="text-white/80">{t("cta.feature1.description")}</p>
-                </div>
-              </div>
 
               <div className="flex items-start">
                 <CheckCircle className="h-6 w-6 text-accent mr-3 mt-0.5 flex-shrink-0" />
