@@ -80,6 +80,65 @@ export function PricingSection() {
       ],
       popular: false,
     },
+    {
+      name: t("pricing.plan4.name"),
+      description: t("pricing.plan4.description"),
+      price: "479",
+      features: [
+        t("pricing.plan4.features.1"),
+        t("pricing.plan4.features.2"),
+        t("pricing.plan4.features.3"),
+        t("pricing.plan4.features.4"),
+        t("pricing.plan4.features.5"),
+        t("pricing.plan4.features.6"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan5.name"),
+      description: t("pricing.plan5.description"),
+      price: "700",
+      features: [
+        t("pricing.plan5.features.1"),
+        t("pricing.plan5.features.2"),
+        t("pricing.plan5.features.3"),
+        t("pricing.plan5.features.4"),
+        t("pricing.plan5.features.5"),
+        t("pricing.plan5.features.6"),
+        t("pricing.plan5.features.7"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan6.name"),
+      description: t("pricing.plan6.description"),
+      price: "990",
+      features: [
+        t("pricing.plan6.features.1"),
+        t("pricing.plan6.features.2"),
+        t("pricing.plan6.features.3"),
+        t("pricing.plan6.features.4"),
+        t("pricing.plan6.features.5"),
+        t("pricing.plan6.features.6"),
+        t("pricing.plan6.features.7"),
+        t("pricing.plan6.features.8"),
+      ],
+      popular: false,
+    },
+    {
+      name: t("pricing.plan7.name"),
+      description: t("pricing.plan7.description"),
+      price: "1490",
+      features: [
+        t("pricing.plan7.features.1"),
+        t("pricing.plan7.features.2"),
+        t("pricing.plan7.features.3"),
+        t("pricing.plan7.features.4"),
+        t("pricing.plan7.features.5"),
+        t("pricing.plan7.features.6"),
+      ],
+      popular: false,
+    },
   ]
 
   return (
@@ -106,7 +165,7 @@ export function PricingSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {plans.map((plan, index) => (
             <motion.div
@@ -118,7 +177,9 @@ export function PricingSection() {
               } overflow-hidden`}
             >
               {plan.popular && (
-                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">{t("pricing.popular_label")}</div>
+                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
+                  {t("pricing.popular_label")}
+                </div>
               )}
 
               <div className="p-8">
@@ -126,8 +187,7 @@ export function PricingSection() {
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary dark:text-white">${plan.price}</span>
-                  <span className="text-muted-foreground"> EUR</span>
+                  <span className="text-4xl font-bold text-primary dark:text-white">R${plan.price}</span>
                 </div>
 
                 <ul className="space-y-3 mb-8">
