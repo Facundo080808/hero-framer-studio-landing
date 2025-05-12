@@ -143,7 +143,7 @@ export function PricingSection() {
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50">
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -174,13 +174,15 @@ export function PricingSection() {
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
               className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
                 plan.popular ? "border-secondary" : "border-border"
-              } overflow-hidden w-full max-w-md mx-auto`}
+              } overflow-hidden flex flex-col`}
             >
               {plan.popular && (
-                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">{t("pricing.popular_label")}</div>
+                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
+                  {t("pricing.popular_label")}
+                </div>
               )}
 
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <h3 className="text-2xl font-bold mb-2 text-primary dark:text-white">{plan.name}</h3>
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
@@ -199,7 +201,7 @@ export function PricingSection() {
                 </ul>
 
                 <Button
-                  className={`w-full ${
+                  className={`w-full mt-auto ${
                     plan.popular
                       ? "bg-secondary hover:bg-secondary/90 text-white"
                       : "bg-primary hover:bg-primary/90 text-white"
