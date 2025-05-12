@@ -185,8 +185,8 @@ export function PricingSection() {
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary dark:text-white">R${plan.price}</span>
-                  <span className="text-muted-foreground"> BRL</span>
+                  <span className="text-4xl font-bold text-primary dark:text-white">€{plan.price}</span>
+                  <span className="text-muted-foreground"> EUR</span>
                 </div>
 
                 <ul className="space-y-3 mb-8">
