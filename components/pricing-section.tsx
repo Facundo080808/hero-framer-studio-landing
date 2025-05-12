@@ -165,22 +165,22 @@ export function PricingSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {plans.map((plan, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className={`_above_ bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
+              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
                 plan.popular ? "border-secondary" : "border-border"
-              } overflow-hidden`}
+              } overflow-hidden w-full max-w-md mx-auto`}
             >
               {plan.popular && (
                 <div className="bg-secondary text-white text-center py-2 text-sm font-medium">{t("pricing.popular_label")}</div>
               )}
 
-              <div className="p-8">
+              <div className="p-6">
                 <h3 className="text-2xl font-bold mb-2 text-primary dark:text-white">{plan.name}</h3>
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
