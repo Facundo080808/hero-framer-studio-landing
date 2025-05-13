@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Check } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
+
 export function PricingSection() {
   const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,20 +36,6 @@ export function PricingSection() {
 
   const plans = [
     {
-      name: t("pricing.plan1.name"),
-      description: t("pricing.plan1.description"),
-      price: "1,499",
-      features: [
-        t("pricing.plan1.features.1"),
-        t("pricing.plan1.features.2"),
-        t("pricing.plan1.features.3"),
-        t("pricing.plan1.features.4"),
-        t("pricing.plan1.features.5"),
-        t("pricing.plan1.features.6"),
-      ],
-      popular: false,
-    },
-    {
       name: t("pricing.plan2.name"),
       description: t("pricing.plan2.description"),
       price: "2,499",
@@ -63,23 +51,7 @@ export function PricingSection() {
       ],
       popular: true,
     },
-    {
-      name: t("pricing.plan3.name"),
-      description: t("pricing.plan3.description"),
-      price: "3,999",
-      features: [
-        t("pricing.plan3.features.1"),
-        t("pricing.plan3.features.2"),
-        t("pricing.plan3.features.3"),
-        t("pricing.plan3.features.4"),
-        t("pricing.plan3.features.5"),
-        t("pricing.plan3.features.6"),
-        t("pricing.plan3.features.7"),
-        t("pricing.plan3.features.8"),
-        t("pricing.plan3.features.9"),
-      ],
-      popular: false,
-    },
+
     {
       name: t("pricing.plan4.name"),
       description: t("pricing.plan4.description"),
@@ -141,6 +113,14 @@ export function PricingSection() {
     },
   ]
 
+  const scrollToContact = () => {
+    const contactSection = document.querySelector('#contacto-form')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50">
       <div className="container mx-auto px-4">
@@ -171,9 +151,8 @@ export function PricingSection() {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${
-                plan.popular ? "border-secondary" : "border-border"
-              } overflow-hidden`}
+              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${plan.popular ? "border-secondary" : "border-border"
+                } overflow-hidden`}
             >
               {plan.popular && (
                 <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
@@ -199,14 +178,15 @@ export function PricingSection() {
                 </ul>
 
                 <Button
-                  className={`w-full ${
-                    plan.popular
+                  className={`w-full ${plan.popular
                       ? "bg-secondary hover:bg-secondary/90 text-white"
                       : "bg-primary hover:bg-primary/90 text-white"
-                  }`}
+                    }`}
+                  onClick={scrollToContact}
                 >
                   {t("pricing.button")}
                 </Button>
+
               </div>
             </motion.div>
           ))}
