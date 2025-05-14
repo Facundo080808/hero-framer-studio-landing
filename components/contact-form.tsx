@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -36,22 +36,28 @@ export function ContactForm() {
 
   const plans: Plan[] = [
     {
-      id: "esencial",
-      name: t("contact.plan1.name"),
-      price: "1,499",
-      description: t("contact.plan1.description"),
+      id: "startup",
+      name: t("contact.plan4.name"),
+      price: "479",
+      description: t("contact.plan4.description"),
     },
     {
-      id: "profesional",
-      name: t("contact.plan2.name"),
-      price: "2,499",
-      description: t("contact.plan2.description"),
+      id: "grow",
+      name: t("contact.plan5.name"),
+      price: "700",
+      description: t("contact.plan5.description"),
     },
     {
-      id: "premium",
-      name: t("contact.plan3.name"),
-      price: "3,999",
-      description: t("contact.plan3.description"),
+      id: "scale-up",
+      name: t("contact.plan6.name"),
+      price: "990",
+      description: t("contact.plan6.description"),
+    },
+    {
+      id: "enterprise",
+      name: t("contact.plan7.name"),
+      price: "1490",
+      description: t("contact.plan7.description"),
     },
   ]
 
@@ -121,13 +127,30 @@ export function ContactForm() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Simulación de envío
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+  
+      const data = await response.json()
+  
+      if (data.success) {
+        setIsSubmitting(false)
+        setIsSubmitted(true)
+      } else {
+        console.error("Email sending failed", data.error)
+        setIsSubmitting(false)
+      }
+    } catch (error) {
+      console.error("Submission error:", error)
       setIsSubmitting(false)
-      setIsSubmitted(true)
-    }, 2000)
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -136,13 +159,6 @@ export function ContactForm() {
       handleNext()
     }
   }
-
-  // Scroll to form on step change
-  // useEffect(() => {
-  //   if (formRef.current) {
-  //     formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
-  //   }
-  // }, [step])
 
   const variants = {
     hidden: { opacity: 0, x: 50 },
@@ -208,7 +224,7 @@ export function ContactForm() {
                           <RadioGroupItem value={plan.id} id={plan.id} className="text-secondary" />
                           <div className="flex-1">
                             <Label htmlFor={plan.id} className="text-lg font-medium cursor-pointer">
-                              {plan.name} - ${plan.price}
+                              {plan.name} - R${plan.price}
                             </Label>
                             <p className="text-sm text-muted-foreground">{plan.description}</p>
                           </div>
@@ -231,7 +247,6 @@ export function ContactForm() {
                       placeholder={steps[step].placeholder}
                       className="w-full text-lg py-6"
                       onKeyDown={handleKeyDown}
-                      // autoFocus
                     />
                   )}
 

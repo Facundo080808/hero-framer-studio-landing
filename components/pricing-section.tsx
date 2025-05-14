@@ -6,12 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Check } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
-
 export function PricingSection() {
   const { t } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
-
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,23 +33,6 @@ export function PricingSection() {
   }
 
   const plans = [
-    {
-      name: t("pricing.plan2.name"),
-      description: t("pricing.plan2.description"),
-      price: "2,499",
-      features: [
-        t("pricing.plan2.features.1"),
-        t("pricing.plan2.features.2"),
-        t("pricing.plan2.features.3"),
-        t("pricing.plan2.features.4"),
-        t("pricing.plan2.features.5"),
-        t("pricing.plan2.features.6"),
-        t("pricing.plan2.features.7"),
-        t("pricing.plan2.features.8"),
-      ],
-      popular: true,
-    },
-
     {
       name: t("pricing.plan4.name"),
       description: t("pricing.plan4.description"),
@@ -79,7 +60,7 @@ export function PricingSection() {
         t("pricing.plan5.features.6"),
         t("pricing.plan5.features.7"),
       ],
-      popular: false,
+      popular: true, // Cambiado de false a true
     },
     {
       name: t("pricing.plan6.name"),
@@ -119,7 +100,6 @@ export function PricingSection() {
       contactSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
-
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50">
@@ -186,7 +166,6 @@ export function PricingSection() {
                 >
                   {t("pricing.button")}
                 </Button>
-
               </div>
             </motion.div>
           ))}
