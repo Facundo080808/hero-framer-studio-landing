@@ -85,7 +85,7 @@ const translations = {
     "services.card1.alt": "Landing Page de Ventas",
     "services.card1.case_study.client": "TechSolutions Inc.",
     "services.card1.case_study.result": "+45% conversiones",
-    "services.card2.case_study.client": "EcoFriendly",
+    "services.card2.case_study.client": "",
     "services.card2.case_study.result": "320 leads en 1 semana",
     "services.card3.case_study.client": "EventMasters",
     "services.card3.case_study.result": "98% de registros completados",

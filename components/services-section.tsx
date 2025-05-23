@@ -230,22 +230,7 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
-
-                {/* Case study pill */}
-                <div className="flex items-center mb-8 p-3 bg-muted/50 rounded-lg">
-                  <div className="mr-3">
-                    <BarChart className="h-5 w-5 text-secondary" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-medium">{service.caseStudy.client}</div>
-                    <div className="text-sm text-secondary font-semibold">{service.caseStudy.result}</div>
-                  </div>
-                </div>
-
-                <Button className="w-full bg-secondary hover:bg-secondary/90 text-white group">
-                  <span>{t("services.button")}</span>
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
+                
               </div>
             </motion.div>
           ))}

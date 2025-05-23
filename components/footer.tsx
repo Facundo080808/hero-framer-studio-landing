@@ -14,7 +14,7 @@ export function Footer() {
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Link href="/" className="inline-block mb-6">
+            {/* <Link href="/" className="inline-block mb-6">
               <Image
                 src="/placeholder.svg?height=40&width=180"
                 alt="Hero&Framer Studio"
@@ -22,7 +22,7 @@ export function Footer() {
                 height={40}
                 className="h-10 w-auto"
               />
-            </Link>
+            </Link> */}
 
             <p className="text-white/80 mb-6">
               {t("footer.description")}
