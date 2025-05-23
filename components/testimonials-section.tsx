@@ -122,13 +122,7 @@ export function TestimonialsSection() {
                 className="flex flex-col md:flex-row gap-8 items-center"
               >
                 <div className="flex-shrink-0">
-                  <Image
-                    src={testimonials[currentIndex].image || "/placeholder.svg"}
-                    alt={testimonials[currentIndex].alt}
-                    width={80}
-                    height={80}
-                    className="rounded-full border-4 border-secondary/20"
-                  />
+                 
                 </div>
 
                 <div className="text-center md:text-left">

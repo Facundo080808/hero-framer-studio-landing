@@ -48,15 +48,7 @@ export function Navbar() {
       `}</style>
 
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/placeholder.svg?height=40&width=180"
-            alt="Hero&Framer Studio"
-            width={180}
-            height={40}
-            className="h-10 w-auto"
-          />
-        </Link>
+        
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">

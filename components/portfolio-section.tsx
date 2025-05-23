@@ -72,13 +72,7 @@ export function PortfolioSection() {
       result: t("portfolio.item5.result"),
       alt: t("portfolio.item5.alt"),
     },
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item6.client"),
-      type: t("portfolio.item6.type"),
-      result: t("portfolio.item6.result"),
-      alt: t("portfolio.item6.alt"),
-    },
+   
     {
       image: "/placeholder.svg",
       client: t("portfolio.item7.client"),
@@ -92,13 +86,6 @@ export function PortfolioSection() {
       type: t("portfolio.item8.type"),
       result: t("portfolio.item8.result"),
       alt: t("portfolio.item8.alt"),
-    },
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item9.client"),
-      type: t("portfolio.item9.type"),
-      result: t("portfolio.item9.result"),
-      alt: t("portfolio.item9.alt"),
     },
     {
       image: "/placeholder.svg",
