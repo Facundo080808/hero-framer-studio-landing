@@ -265,7 +265,17 @@ export function ServicesSection() {
           </motion.div>
 
           <motion.div variants={itemVariants}>
-            <Link href="#" className="inline-flex items-center text-lg font-medium text-secondary hover:underline">
+            <Link 
+              href="#contacto-form" 
+              className="inline-flex items-center text-lg font-medium text-secondary hover:underline"
+              onClick={(e) => {
+                e.preventDefault();
+                const contactSection = document.getElementById('contacto-form');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
               {t("services.cta")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>

@@ -28,7 +28,7 @@ export function Footer() {
               {t("footer.description")}
             </p>
 
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <Link href="#" className="text-white/80 hover:text-white transition-colors">
                 <Facebook size={20} />
                 <span className="sr-only">{t("footer.social.facebook")}</span>
@@ -45,7 +45,7 @@ export function Footer() {
                 <Linkedin size={20} />
                 <span className="sr-only">{t("footer.social.linkedin")}</span>
               </Link>
-            </div>
+            </div> */}
           </div>
 
           <div>
@@ -110,7 +110,7 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-6">{t("footer.contact")}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
@@ -126,7 +126,7 @@ export function Footer() {
                 <span className="text-white/80">{t("footer.contact.email")}</span>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">

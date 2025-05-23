@@ -48,10 +48,6 @@ export function FaqSection() {
       question: t("faq.q4.question"),
       answer: t("faq.q4.answer"),
     },
-    {
-      question: t("faq.q5.question"),
-      answer: t("faq.q5.answer"),
-    },
   ]
 
   return (

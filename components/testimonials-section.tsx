@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useInView, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
@@ -20,6 +21,7 @@ export function TestimonialsSection() {
       text: t("testimonials.item1.text"),
       result: t("testimonials.item1.result"),
       alt: t("testimonials.item1.alt"),
+      link: t("testimonials.item1.link"),
     },
     {
       name: t("testimonials.item2.name"),
@@ -28,6 +30,7 @@ export function TestimonialsSection() {
       text: t("testimonials.item2.text"),
       result: t("testimonials.item2.result"),
       alt: t("testimonials.item2.alt"),
+      link: t("testimonials.item2.link"),
     },
     {
       name: t("testimonials.item3.name"),
@@ -36,6 +39,25 @@ export function TestimonialsSection() {
       text: t("testimonials.item3.text"),
       result: t("testimonials.item3.result"),
       alt: t("testimonials.item3.alt"),
+      link: t("testimonials.item3.link"),
+    },
+    {
+      name: t("testimonials.item4.name"),
+      company: t("testimonials.item4.company"),
+      image: "/placeholder.svg?height=80&width=80",
+      text: t("testimonials.item4.text"),
+      result: t("testimonials.item4.result"),
+      alt: t("testimonials.item4.alt"),
+      link: t("testimonials.item4.link"),
+    },
+    {
+      name: t("testimonials.item5.name"),
+      company: t("testimonials.item5.company"),
+      image: "/placeholder.svg?height=80&width=80",
+      text: t("testimonials.item5.text"),
+      result: t("testimonials.item5.result"),
+      alt: t("testimonials.item5.alt"),
+      link: t("testimonials.item5.link"),
     },
   ]
 
@@ -143,7 +165,20 @@ export function TestimonialsSection() {
                       <div className="font-semibold text-primary dark:text-white">
                         {testimonials[currentIndex].name}
                       </div>
-                      <div className="text-sm text-muted-foreground">{testimonials[currentIndex].company}</div>
+                      <div className="text-sm text-muted-foreground">
+                        {testimonials[currentIndex].link ? (
+                          <Link
+                            href={testimonials[currentIndex].link}
+                            className="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {testimonials[currentIndex].company}
+                          </Link>
+                        ) : (
+                          testimonials[currentIndex].company
+                        )}
+                      </div>
                     </div>
 
                     <div className="mt-4 md:mt-0">
