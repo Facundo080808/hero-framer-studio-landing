@@ -73,27 +73,6 @@ export function PortfolioSection() {
       alt: t("portfolio.item5.alt"),
     },
    
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item7.client"),
-      type: t("portfolio.item7.type"),
-      result: t("portfolio.item7.result"),
-      alt: t("portfolio.item7.alt"),
-    },
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item8.client"),
-      type: t("portfolio.item8.type"),
-      result: t("portfolio.item8.result"),
-      alt: t("portfolio.item8.alt"),
-    },
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item10.client"),
-      type: t("portfolio.item10.type"),
-      result: t("portfolio.item10.result"),
-      alt: t("portfolio.item10.alt"),
-    }
   ]
 
   return (
