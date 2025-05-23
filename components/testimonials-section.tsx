@@ -14,33 +14,7 @@ export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const testimonials = [
-    {
-      name: t("testimonials.item1.name"),
-      company: t("testimonials.item1.company"),
-      image: "/placeholder.svg?height=80&width=80",
-      text: t("testimonials.item1.text"),
-      result: t("testimonials.item1.result"),
-      alt: t("testimonials.item1.alt"),
-      link: t("testimonials.item1.link"),
-    },
-    {
-      name: t("testimonials.item2.name"),
-      company: t("testimonials.item2.company"),
-      image: "/placeholder.svg?height=80&width=80",
-      text: t("testimonials.item2.text"),
-      result: t("testimonials.item2.result"),
-      alt: t("testimonials.item2.alt"),
-      link: t("testimonials.item2.link"),
-    },
-    {
-      name: t("testimonials.item3.name"),
-      company: t("testimonials.item3.company"),
-      image: "/placeholder.svg?height=80&width=80",
-      text: t("testimonials.item3.text"),
-      result: t("testimonials.item3.result"),
-      alt: t("testimonials.item3.alt"),
-      link: t("testimonials.item3.link"),
-    },
+    
     {
       name: t("testimonials.item4.name"),
       company: t("testimonials.item4.company"),
