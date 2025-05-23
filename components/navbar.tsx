@@ -25,7 +25,7 @@ export function Navbar() {
     { name: t("nav.process"), href: "#proceso" },
     { name: t("nav.testimonials"), href: "#testimonios" },
     { name: t("nav.blog"), href: "#blog" },
-    { name: t("nav.contact"), href: "#contacto" },
+    { name: t("nav.contact"), href: "#contacto-form" },
   ]
 
   return (
