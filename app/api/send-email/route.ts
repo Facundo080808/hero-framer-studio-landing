@@ -120,7 +120,7 @@ export async function POST(req: Request) {
 
     const result = await resend.emails.send({
       from: 'Hero&Framer Studio <info@landingpages.protoly.lat>',
-      to: 'ruanomiguelalejandro@gmail.com',
+      to: 'charlesriquelmea@gmail.com',
       subject: `✨ Nueva solicitud de ${name} - ${plan}`,
       html: emailContent,
     })
