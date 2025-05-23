@@ -48,7 +48,6 @@ export function Navbar() {
       `}</style>
 
       <div className="container mx-auto px-4 h-full flex items-center justify-between">
-        
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
@@ -61,16 +60,26 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
-          <LanguageSwitcher />
-          <ModeToggle />
-          <Button className="bg-secondary hover:bg-secondary/90 text-white">{t("nav.consultation")}</Button>
         </nav>
 
+        {/* Right side controls */}
+        <div className="flex items-center space-x-4">
+          <Button className="bg-secondary hover:bg-secondary/90 text-white hidden md:inline-flex">
+            {t("nav.consultation")}
+          </Button>
+          <div className="flex items-center space-x-2">
+            <LanguageSwitcher />
+            <ModeToggle />
+          </div>
+        </div>
+
         {/* Mobile Navigation Toggle */}
-        <div className="flex items-center md:hidden space-x-4">
-          <LanguageSwitcher />
-          <ModeToggle />
-          <button onClick={() => setIsOpen(!isOpen)} className="text-primary p-2" aria-label="Toggle Menu">
+        <div className="flex items-center md:hidden space-x-2">
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="text-primary p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" 
+            aria-label="Toggle Menu"
+          >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -82,21 +91,41 @@ export function Navbar() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-background dark:bg-slate-900 border-b"
+          className="md:hidden bg-background dark:bg-slate-900 border-b fixed inset-0 top-16 z-40 overflow-y-auto"
+          onClick={() => setIsOpen(false)}
         >
-          <div className="container mx-auto px-4 py-4">
-            <nav className="flex flex-col space-y-4">
+          <div className="container mx-auto px-4 py-6">
+            <nav className="flex flex-col space-y-6">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-sm font-medium py-2 hover:text-secondary transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  className="text-base font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button className="bg-secondary hover:bg-secondary/90 text-white w-full">{t("nav.consultation")}</Button>
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-800 mt-4">
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    {t("language.language")}
+                  </span>
+                  <LanguageSwitcher />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                    {t("theme.theme")}
+                  </span>
+                  <ModeToggle />
+                </div>
+              </div>
+              <Button 
+                className="bg-secondary hover:bg-secondary/90 text-white w-full mt-4 py-6 text-base"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {t("nav.consultation")}
+              </Button>
             </nav>
           </div>
         </motion.div>
