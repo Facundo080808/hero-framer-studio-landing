@@ -18,18 +18,20 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem
-          onClick={() => setTheme("light")}
-          className={theme === "light" ? "bg-secondary/10 text-secondary" : ""}
-        >
-          Claro
-        </DropdownMenuItem>
+
         <DropdownMenuItem
           onClick={() => setTheme("dark")}
           className={theme === "dark" ? "bg-secondary/10 text-secondary" : ""}
         >
           Oscuro
         </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme("light")}
+          className={theme === "light" ? "bg-secondary/10 text-secondary" : ""}
+        >
+          Claro
+        </DropdownMenuItem>
+
         <DropdownMenuItem
           onClick={() => setTheme("system")}
           className={theme === "system" ? "bg-secondary/10 text-secondary" : ""}
