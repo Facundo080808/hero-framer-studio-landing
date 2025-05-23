@@ -65,13 +65,6 @@ export function PortfolioSection() {
       alt: t("portfolio.item4.alt"),
       url: "https://franchise.perceivoai.agency"
     },
-    {
-      image: "/placeholder.svg",
-      client: t("portfolio.item5.client"),
-      type: t("portfolio.item5.type"),
-      result: t("portfolio.item5.result"),
-      alt: t("portfolio.item5.alt"),
-    },
    
   ]
 
