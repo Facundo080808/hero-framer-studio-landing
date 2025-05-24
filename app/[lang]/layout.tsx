@@ -8,7 +8,7 @@ import { LanguageProvider } from "../../contexts/language-context"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Hero&Framer Studio | Landing Pages que Convierten",
+  title: "Framer Studio | Agencia de Landing Pages de Alto Impacto",
   description:
     "Agencia especializada en diseño de landing pages convertibles y lead magnets. Transformamos visitantes en clientes con diseños estratégicos y persuasivos.",
 }
