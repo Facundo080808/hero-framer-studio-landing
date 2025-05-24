@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -20,7 +19,7 @@ type Plan = {
 }
 
 export function ContactForm() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage() // Add language to the destructured hook
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState({
     name: "",
@@ -34,29 +33,45 @@ export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const formRef = useRef<HTMLDivElement>(null)
 
+  // Define prices based on language
+  const prices = {
+    es: {
+      startup: "69.990 CLP neto",
+      grow: "99.990 CLP neto",
+      scaleUp: "149.990 CLP neto",
+      enterprise: "199.990 CLP neto",
+    },
+    pt: {
+      startup: "479",
+      grow: "700",
+      scaleUp: "990",
+      enterprise: "1490",
+    },
+  }
+
   const plans: Plan[] = [
     {
       id: "startup",
       name: t("contact.plan4.name"),
-      price: "479",
+      price: prices[language].startup,
       description: t("contact.plan4.description"),
     },
     {
       id: "grow",
       name: t("contact.plan5.name"),
-      price: "700",
+      price: prices[language].grow,
       description: t("contact.plan5.description"),
     },
     {
       id: "scale-up",
       name: t("contact.plan6.name"),
-      price: "990",
+      price: prices[language].scaleUp,
       description: t("contact.plan6.description"),
     },
     {
       id: "enterprise",
       name: t("contact.plan7.name"),
-      price: "1490",
+      price: prices[language].enterprise,
       description: t("contact.plan7.description"),
     },
   ]
@@ -88,7 +103,7 @@ export function ContactForm() {
       field: "whatsapp",
       type: "tel",
       placeholder: t("form.whatsapp.placeholder"),
-      validate: () => true, // Campo opcional
+      validate: () => true, // Optional field
     },
     {
       title: t("contact.step5.title"),
@@ -137,9 +152,9 @@ export function ContactForm() {
         },
         body: JSON.stringify(formData),
       })
-  
+
       const data = await response.json()
-  
+
       if (data.success) {
         setIsSubmitting(false)
         setIsSubmitted(true)
@@ -184,7 +199,6 @@ export function ContactForm() {
         >
           {!isSubmitted ? (
             <div className="p-8 md:p-12">
-              {/* Progress bar */}
               <div className="w-full h-1 bg-muted rounded-full mb-8 overflow-hidden">
                 <motion.div
                   className="h-full bg-secondary"
@@ -214,17 +228,16 @@ export function ContactForm() {
                       {plans.map((plan) => (
                         <div
                           key={plan.id}
-                          className={`flex items-center space-x-2 p-4 rounded-lg border ${
-                            formData.plan === plan.id
+                          className={`flex items-center space-x-2 p-4 rounded-lg border ${formData.plan === plan.id
                               ? "border-secondary bg-secondary/5"
                               : "border-border hover:border-secondary/50"
-                          } cursor-pointer transition-colors`}
+                            } cursor-pointer transition-colors`}
                           onClick={() => handleInputChange("plan", plan.id)}
                         >
                           <RadioGroupItem value={plan.id} id={plan.id} className="text-secondary" />
                           <div className="flex-1">
                             <Label htmlFor={plan.id} className="text-lg font-medium cursor-pointer">
-                              {plan.name} - R${plan.price}
+                              {plan.name} - {language === "es" ? plan.price : `R$${plan.price}`}
                             </Label>
                             <p className="text-sm text-muted-foreground">{plan.description}</p>
                           </div>

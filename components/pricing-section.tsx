@@ -7,7 +7,7 @@ import { Check } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
 export function PricingSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage() // Add language to the destructured hook
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -32,11 +32,27 @@ export function PricingSection() {
     },
   }
 
+  // Define prices based on language
+  const prices = {
+    es: {
+      startup: "69.990 CLP neto",
+      grow: "99.990 CLP neto",
+      scaleUp: "149.990 CLP neto",
+      enterprise: "199.990 CLP neto",
+    },
+    pt: {
+      startup: "479",
+      grow: "700",
+      scaleUp: "990",
+      enterprise: "1490",
+    },
+  }
+
   const plans = [
     {
       name: t("pricing.plan4.name"),
       description: t("pricing.plan4.description"),
-      price: "479",
+      price: prices[language].startup,
       features: [
         t("pricing.plan4.features.1"),
         t("pricing.plan4.features.2"),
@@ -51,7 +67,7 @@ export function PricingSection() {
     {
       name: t("pricing.plan5.name"),
       description: t("pricing.plan5.description"),
-      price: "700",
+      price: prices[language].grow,
       features: [
         t("pricing.plan5.features.1"),
         t("pricing.plan5.features.2"),
@@ -67,7 +83,7 @@ export function PricingSection() {
     {
       name: t("pricing.plan6.name"),
       description: t("pricing.plan6.description"),
-      price: "990",
+      price: prices[language].scaleUp,
       features: [
         t("pricing.plan6.features.1"),
         t("pricing.plan6.features.2"),
@@ -84,7 +100,7 @@ export function PricingSection() {
     {
       name: t("pricing.plan7.name"),
       description: t("pricing.plan7.description"),
-      price: "1490",
+      price: prices[language].enterprise,
       features: [
         t("pricing.plan7.features.1"),
         t("pricing.plan7.features.2"),
@@ -135,8 +151,7 @@ export function PricingSection() {
               key={index}
               variants={itemVariants}
               whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${plan.popular ? "border-secondary" : "border-border"
-                } overflow-hidden`}
+              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${plan.popular ? "border-secondary" : "border-border"} overflow-hidden`}
             >
               {plan.popular && (
                 <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
@@ -149,7 +164,9 @@ export function PricingSection() {
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary dark:text-white">R${plan.price}</span>
+                  <span className="text-4xl font-bold text-primary dark:text-white">
+                    {language === "es" ? plan.price : `R$${plan.price}`}
+                  </span>
                 </div>
 
                 <ul className="space-y-3 mb-8">
