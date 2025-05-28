@@ -164,9 +164,14 @@ export function PricingSection() {
                 <p className="text-muted-foreground mb-6">{plan.description}</p>
 
                 <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary dark:text-white">
-                    {language === "es" ? plan.price : `R$${plan.price}`}
-                  </span>
+                  <div className="text-4xl font-bold text-primary dark:text-white">
+                    {language === "es" ? plan.price : `R$ ${plan.price}`}
+                  </div>
+                  {language === "pt" && (
+                    <div className="text-sm text-muted-foreground mt-1">
+                      + 10% Crédito a Vista o Parcelado
+                    </div>
+                  )}
                 </div>
 
                 <ul className="space-y-3 mb-8">

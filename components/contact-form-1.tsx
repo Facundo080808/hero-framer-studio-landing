@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -20,7 +19,7 @@ type Plan = {
 }
 
 export function ContactForm() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage() // Add language to the destructured hook
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState({
     name: "",
@@ -34,47 +33,69 @@ export function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const formRef = useRef<HTMLDivElement>(null)
 
+  // Define prices based on language
+  const prices = {
+    es: {
+      startup: "69.990 CLP neto",
+      grow: "99.990 CLP neto",
+      scaleUp: "149.990 CLP neto",
+      enterprise: "199.990 CLP neto",
+    },
+    pt: {
+      startup: "479",
+      grow: "700",
+      scaleUp: "990",
+      enterprise: "1490",
+    },
+  }
+
   const plans: Plan[] = [
     {
-      id: "esencial",
-      name: "Esencial",
-      price: "1,499",
-      description: "Para profesionales independientes",
+      id: "startup",
+      name: t("contact.plan4.name"),
+      price: prices[language].startup,
+      description: t("contact.plan4.description"),
     },
     {
-      id: "profesional",
-      name: "Profesional",
-      price: "2,499",
-      description: "Para pequeñas empresas",
+      id: "grow",
+      name: t("contact.plan5.name"),
+      price: prices[language].grow,
+      description: t("contact.plan5.description"),
     },
     {
-      id: "premium",
-      name: "Premium",
-      price: "3,999",
-      description: "Para medianas empresas",
+      id: "scale-up",
+      name: t("contact.plan6.name"),
+      price: prices[language].scaleUp,
+      description: t("contact.plan6.description"),
+    },
+    {
+      id: "enterprise",
+      name: t("contact.plan7.name"),
+      price: prices[language].enterprise,
+      description: t("contact.plan7.description"),
     },
   ]
 
   const steps = [
     {
-      title: "¿Cómo te llamas?",
+      title: t("contact.step1.title"),
       field: "name",
       type: "text",
-      placeholder: "Tu nombre completo",
+      placeholder: t("contact.step1.placeholder"),
       validate: (value: string) => value.trim().length > 0,
     },
     {
-      title: "¿Cuál es tu correo electrónico?",
+      title: t("contact.step2.title"),
       field: "email",
       type: "email",
-      placeholder: "tu@email.com",
+      placeholder: t("contact.step2.placeholder"),
       validate: (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
     },
     {
-      title: "¿Para qué empresa trabajas?",
+      title: t("contact.step3.title"),
       field: "company",
       type: "text",
-      placeholder: "Nombre de tu empresa",
+      placeholder: t("contact.step3.placeholder"),
       validate: (value: string) => value.trim().length > 0,
     },
     {
@@ -82,20 +103,20 @@ export function ContactForm() {
       field: "whatsapp",
       type: "tel",
       placeholder: t("form.whatsapp.placeholder"),
-      validate: () => true, // Campo opcional
+      validate: () => true, // Optional field
     },
     {
-      title: "¿Qué plan te interesa?",
+      title: t("contact.step5.title"),
       field: "plan",
       type: "radio",
       options: plans,
       validate: (value: string) => value.trim().length > 0,
     },
     {
-      title: "¿Algo más que quieras contarnos?",
+      title: t("contact.step6.title"),
       field: "message",
       type: "textarea",
-      placeholder: "Cuéntanos más sobre tu proyecto...",
+      placeholder: t("contact.step6.placeholder"),
       validate: () => true, // Optional field
     },
   ]
@@ -121,13 +142,30 @@ export function ContactForm() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true)
-    // Simulación de envío
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setIsSubmitting(false)
+        setIsSubmitted(true)
+      } else {
+        console.error("Email sending failed", data.error)
+        setIsSubmitting(false)
+      }
+    } catch (error) {
+      console.error("Submission error:", error)
       setIsSubmitting(false)
-      setIsSubmitted(true)
-    }, 2000)
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -136,13 +174,6 @@ export function ContactForm() {
       handleNext()
     }
   }
-
-  // Scroll to form on step change
-  // useEffect(() => {
-  //   if (formRef.current) {
-  //     formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
-  //   }
-  // }, [step])
 
   const variants = {
     hidden: { opacity: 0, x: 50 },
@@ -155,10 +186,10 @@ export function ContactForm() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary dark:text-white">
-            ¿Listo para empezar tu proyecto?
+            {t("contact.title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Cuéntanos sobre tu proyecto y te ayudaremos a elegir la mejor solución para tus necesidades.
+            {t("contact.subtitle")}
           </p>
         </div>
 
@@ -168,7 +199,6 @@ export function ContactForm() {
         >
           {!isSubmitted ? (
             <div className="p-8 md:p-12">
-              {/* Progress bar */}
               <div className="w-full h-1 bg-muted rounded-full mb-8 overflow-hidden">
                 <motion.div
                   className="h-full bg-secondary"
@@ -198,17 +228,16 @@ export function ContactForm() {
                       {plans.map((plan) => (
                         <div
                           key={plan.id}
-                          className={`flex items-center space-x-2 p-4 rounded-lg border ${
-                            formData.plan === plan.id
+                          className={`flex items-center space-x-2 p-4 rounded-lg border ${formData.plan === plan.id
                               ? "border-secondary bg-secondary/5"
                               : "border-border hover:border-secondary/50"
-                          } cursor-pointer transition-colors`}
+                            } cursor-pointer transition-colors`}
                           onClick={() => handleInputChange("plan", plan.id)}
                         >
                           <RadioGroupItem value={plan.id} id={plan.id} className="text-secondary" />
                           <div className="flex-1">
                             <Label htmlFor={plan.id} className="text-lg font-medium cursor-pointer">
-                              {plan.name} - ${plan.price}
+                              {plan.name} - {language === "es" ? plan.price : `R$${plan.price}`}
                             </Label>
                             <p className="text-sm text-muted-foreground">{plan.description}</p>
                           </div>
@@ -238,7 +267,7 @@ export function ContactForm() {
                     {step > 0 ? (
                       <Button variant="outline" onClick={handlePrev} className="flex items-center">
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Anterior
+                        {t("contact.button.prev")}
                       </Button>
                     ) : (
                       <div></div>
@@ -252,15 +281,15 @@ export function ContactForm() {
                       }
                     >
                       {isSubmitting ? (
-                        "Enviando..."
+                        t("contact.button.submitting")
                       ) : step === steps.length - 1 ? (
                         <>
-                          Enviar
+                          {t("contact.button.submit")}
                           <Send className="ml-2 h-4 w-4" />
                         </>
                       ) : (
                         <>
-                          Siguiente
+                          {t("contact.button.next")}
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </>
                       )}
@@ -279,10 +308,8 @@ export function ContactForm() {
                 <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-secondary/10 mb-6">
                   <CheckCircle className="h-10 w-10 text-secondary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-primary dark:text-white">¡Mensaje enviado con éxito!</h3>
-                <p className="text-muted-foreground mb-8">
-                  Gracias por contactarnos. Nos pondremos en contacto contigo lo antes posible.
-                </p>
+                <h3 className="text-2xl font-bold mb-4 text-primary dark:text-white">{t("contact.success.title")}</h3>
+                <p className="text-muted-foreground mb-8">{t("contact.success.message")}</p>
                 <Button
                   onClick={() => {
                     setStep(0)
@@ -298,7 +325,7 @@ export function ContactForm() {
                   }}
                   className="bg-secondary hover:bg-secondary/90 text-white"
                 >
-                  Enviar otro mensaje
+                  {t("contact.button.reset")}
                 </Button>
               </motion.div>
             </div>
