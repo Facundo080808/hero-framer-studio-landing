@@ -228,13 +228,13 @@ ${currentUrl}
   }
 
   // Auto-focus input when step changes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const input = document.querySelector("input, textarea") as HTMLElement
-      if (input) input.focus()
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [currentStep])
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     const input = document.querySelector("input, textarea") as HTMLElement
+  //     if (input) input.focus()
+  //   }, 300)
+  //   return () => clearTimeout(timer)
+  // }, [currentStep])
 
   if (isCompleted) {
     return (
