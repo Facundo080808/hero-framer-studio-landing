@@ -20,11 +20,12 @@ import {
   Package,
   MessageSquare,
 } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 
 interface Plan {
   id: string
   name: string
-  price: number
+  price: string
   description: string
   features: string[]
 }
@@ -38,30 +39,73 @@ interface TypeformContactProps {
 export default function TypeformContact({
   plans = [
     {
-      id: "esencial",
-      name: "Esencial",
-      price: 1499,
-      description: "Para profesionales independientes",
-      features: ["Diseño personalizado", "Responsive", "SEO básico"],
+      id: "startup",
+      name: "Startup",
+      price: "",
+      description: "Para startups en fase inicial",
+      features: [
+        "1 Landing Page",
+        "Diseño responsive premium",
+        "Animaciones Framer Motion",
+        "Entrega en 2 semanas",
+        "Hasta 2 cambios",
+        "Botón de WhatsApp",
+        "Todo en una sola página",
+      ],
     },
     {
-      id: "profesional",
-      name: "Profesional",
-      price: 2499,
-      description: "Para pequeñas empresas",
-      features: ["Todo lo anterior", "Animaciones", "Formularios", "3 revisiones"],
+      id: "grow",
+      name: "Grow",
+      price: "",
+      description: "Para empresas en crecimiento",
+      features: [
+        "1 Landing Page",
+        "Diseño responsive premium",
+        "Animaciones Framer Motion",
+        "Entrega en 7 días hábiles",
+        "Hasta 3 cambios",
+        "Formulario de contacto",
+        "Widget de WhatsApp",
+        "Todo en una sola página",
+      ],
     },
     {
-      id: "premium",
-      name: "Premium",
-      price: 3999,
-      description: "Para medianas empresas",
-      features: ["Todo lo anterior", "CRM", "Analytics", "Revisiones ilimitadas"],
+      id: "scaleUp",
+      name: "Scale Up",
+      price: "",
+      description: "Para empresas que buscan escalar",
+      features: [
+        "1 Landing Page",
+        "Diseño responsive premium",
+        "Animaciones Framer Motion",
+        "Entrega en 5 días hábiles",
+        "Hasta 5 cambios",
+        "Formulario de contacto",
+        "Widget de WhatsApp",
+        "Secciones extra (testimonios, FAQ)",
+        "Todo en una sola página",
+      ],
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      price: "",
+      description: "Para empresas establecidas",
+      features: [
+        "1 Landing Page",
+        "Diseño responsive premium",
+        "Animaciones Framer Motion",
+        "Entrega en 5 días hábiles",
+        "Todas las funcionalidades anteriores",
+        "Optimización SEO básica",
+        "Todo en una sola página",
+      ],
     },
   ],
   whatsappNumber = "56930835236",
   className = "",
 }: TypeformContactProps) {
+  const { language, t } = useLanguage()
   const [currentStep, setCurrentStep] = useState(0)
   const [formData, setFormData] = useState({
     name: "",
@@ -75,65 +119,103 @@ export default function TypeformContact({
   const [isCompleted, setIsCompleted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
+  // Define prices based on language, matching pricing-section.tsx
+  const prices = {
+    es: {
+      startup: "69.990 CLP neto",
+      grow: "99.990 CLP neto",
+      scaleUp: "149.990 CLP neto",
+      enterprise: "199.990 CLP neto",
+    },
+    pt: {
+      startup: "479",
+      grow: "700",
+      scaleUp: "990",
+      enterprise: "1490",
+    },
+  }
+
+  // Map plan IDs to translation keys
+  const planKeyMap: Record<string, string> = {
+    startup: "plan4",
+    grow: "plan5",
+    scaleUp: "plan6",
+    enterprise: "plan7",
+  }
+
+  // Update plans with language-specific prices and translated names/descriptions
+  const updatedPlans = plans.map((plan) => {
+    const planKey = planKeyMap[plan.id]
+    return {
+      ...plan,
+      price: prices[language][plan.id as keyof typeof prices[typeof language]],
+      name: t(`pricing.${planKey}.name`),
+      description: t(`pricing.${planKey}.description`),
+      features: Array.from({ length: plan.features.length }, (_, index) =>
+        t(`pricing.${planKey}.features.${index + 1}`)
+      ),
+    }
+  })
+
   const steps = [
     {
       id: "name",
-      title: "¡Hola! 👋",
-      subtitle: "¿Cómo te llamas?",
+      title: t("contact.step1.title"),
+      subtitle: t("contact.step1.title"),
       type: "text",
-      placeholder: "Escribe tu nombre completo",
+      placeholder: t("contact.step1.placeholder"),
       icon: <User className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value.trim().length >= 2 ? "" : "El nombre debe tener al menos 2 caracteres"),
+      validate: (value: string) => (value.trim().length >= 2 ? "" : t("contact.step1.error") || "El nombre debe tener al menos 2 caracteres"),
     },
     {
       id: "email",
-      title: "Perfecto, " + (formData.name.split(" ")[0] || "amigo") + " 📧",
-      subtitle: "¿Cuál es tu correo electrónico?",
+      title: t("contact.step2.title").replace("{name}", formData.name.split(" ")[0] || "amigo"),
+      subtitle: t("contact.step2.title"),
       type: "email",
-      placeholder: "tu@email.com",
+      placeholder: t("contact.step2.placeholder"),
       icon: <Mail className="h-6 w-6" />,
       required: true,
       validate: (value: string) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return emailRegex.test(value) ? "" : "Por favor, introduce un correo válido"
+        return emailRegex.test(value) ? "" : t("contact.step2.error") || "Por favor, introduce un correo válido"
       },
     },
     {
       id: "company",
-      title: "Genial 🏢",
-      subtitle: "¿Para qué empresa trabajas?",
+      title: t("contact.step3.title"),
+      subtitle: t("contact.step3.title"),
       type: "text",
-      placeholder: "Nombre de tu empresa",
+      placeholder: t("contact.step3.placeholder"),
       icon: <Building className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value.trim().length >= 2 ? "" : "El nombre de la empresa es requerido"),
+      validate: (value: string) => (value.trim().length >= 2 ? "" : t("contact.step3.error") || "El nombre de la empresa es requerido"),
     },
     {
       id: "whatsapp",
-      title: "Casi terminamos 📱",
-      subtitle: "¿Cuál es tu WhatsApp? (opcional)",
+      title: t("form.whatsapp"),
+      subtitle: t("form.whatsapp"),
       type: "tel",
-      placeholder: "+56 9 1234 5678",
+      placeholder: t("form.whatsapp.placeholder"),
       icon: <Phone className="h-6 w-6" />,
       required: false,
       validate: () => "",
     },
     {
       id: "plan",
-      title: "¡Excelente! 🚀",
-      subtitle: "¿Qué plan te interesa más?",
+      title: t("contact.step5.title"),
+      subtitle: t("contact.step5.title"),
       type: "radio",
       icon: <Package className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value ? "" : "Por favor selecciona un plan"),
+      validate: (value: string) => (value ? "" : t("contact.step5.error") || "Por favor selecciona un plan"),
     },
     {
       id: "message",
-      title: "Una última cosa 💭",
-      subtitle: "¿Hay algo más que quieras contarnos sobre tu proyecto?",
+      title: t("contact.step6.title"),
+      subtitle: t("contact.step6.title"),
       type: "textarea",
-      placeholder: "Cuéntanos más detalles sobre tu proyecto, objetivos, timeline, etc.",
+      placeholder: t("contact.step6.placeholder"),
       icon: <MessageSquare className="h-6 w-6" />,
       required: false,
       validate: () => "",
@@ -179,7 +261,7 @@ export default function TypeformContact({
   }
 
   const generateWhatsAppMessage = () => {
-    const selectedPlan = plans.find((plan) => plan.id === formData.plan)
+    const selectedPlan = updatedPlans.find((plan) => plan.id === formData.plan)
     const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
     return encodeURIComponent(`🚀 *SOLICITUD DE LANDING PAGE - HERO&FRAMER STUDIO*
@@ -192,7 +274,7 @@ ${formData.whatsapp ? `• WhatsApp: ${formData.whatsapp}` : ""}
 
 📋 *PLAN SELECCIONADO:*
 • Plan: ${selectedPlan?.name || "No especificado"}
-• Precio: $${selectedPlan?.price || "No especificado"}
+• Precio: ${selectedPlan?.price ? (language === "es" ? selectedPlan.price : `R$ ${selectedPlan.price}`) : "No especificado"}
 • Descripción: ${selectedPlan?.description || "No especificado"}
 
 💬 *MENSAJE ADICIONAL:*
@@ -250,10 +332,9 @@ ${currentUrl}
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 mb-6">
             <CheckCircle className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
-          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">¡Perfecto! 🎉</h2>
+          <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("contact.success.title")}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Tu solicitud se ha enviado por WhatsApp. Nos pondremos en contacto contigo muy pronto para comenzar tu
-            proyecto.
+            {t("contact.success.message")}
           </p>
           <Button
             onClick={() => {
@@ -271,7 +352,7 @@ ${currentUrl}
             variant="outline"
             className="border-gray-300 dark:border-gray-600"
           >
-            Enviar otra solicitud
+            {t("contact.button.reset")}
           </Button>
         </motion.div>
       </div>
@@ -319,7 +400,7 @@ ${currentUrl}
               <div className="space-y-6">
                 {currentStepData.type === "radio" ? (
                   <RadioGroup value={formData.plan} onValueChange={handleInputChange} className="space-y-4">
-                    {plans.map((plan) => (
+                    {updatedPlans.map((plan) => (
                       <motion.div
                         key={plan.id}
                         whileHover={{ scale: 1.02 }}
@@ -338,7 +419,7 @@ ${currentUrl}
                               <div className="flex items-center justify-between mb-2">
                                 <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
                                 <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                                  ${plan.price}
+                                  {language === "es" ? plan.price : `R$ ${plan.price}`}
                                 </span>
                               </div>
                               <p className="text-gray-600 dark:text-gray-300 mb-3">{plan.description}</p>
@@ -398,7 +479,7 @@ ${currentUrl}
                   disabled={isSubmitting}
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Anterior
+                  {t("contact.button.prev")}
                 </Button>
 
                 <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -411,15 +492,15 @@ ${currentUrl}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
-                    "Enviando..."
+                    t("contact.button.submitting")
                   ) : currentStep === steps.length - 1 ? (
                     <>
                       <MessageCircle className="mr-2 h-4 w-4" />
-                      Enviar por WhatsApp
+                      {t("contact.button.submit")}
                     </>
                   ) : (
                     <>
-                      Siguiente
+                      {t("contact.button.next")}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </>
                   )}
