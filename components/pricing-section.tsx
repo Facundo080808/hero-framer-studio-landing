@@ -167,11 +167,12 @@ export function PricingSection() {
                   <div className="text-4xl font-bold text-primary dark:text-white">
                     {language === "es" ? plan.price : `R$ ${plan.price}`}
                   </div>
-                  {language === "pt" && (
-                    <div className="text-sm text-muted-foreground mt-1">
-                      + 10% Crédito a Vista o Parcelado
-                    </div>
-                  )}
+                  <div className="text-sm text-muted-foreground mt-1">
+                    {language === "es" 
+                      ? "+ 10% de Crédito al Contado o en Cuotas"
+                      : "+ 10% Crédito a Vista o Parcelado"
+                    }
+                  </div>
                 </div>
 
                 <ul className="space-y-3 mb-8">

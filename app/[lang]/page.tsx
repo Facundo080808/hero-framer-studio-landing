@@ -14,6 +14,7 @@ import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 import { CookieConsent } from "@/components/cookie-consent"
+import TypeformContact from "@/components/typeform-contact"
 
 export default function Home() {
   return (
@@ -26,7 +27,8 @@ export default function Home() {
       <PortfolioSection />
       <TestimonialsSection />
       <PricingSection />
-      <ContactForm />
+      {/* <ContactForm /> */}
+      <TypeformContact />
       <CtaSection />
       <FaqSection />
       <Footer />
