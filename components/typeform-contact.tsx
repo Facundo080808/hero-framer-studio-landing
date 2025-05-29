@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -19,6 +19,8 @@ import {
   Phone,
   Package,
   MessageSquare,
+  AlertCircle,
+  X,
 } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
@@ -118,6 +120,9 @@ export default function TypeformContact({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [showValidation, setShowValidation] = useState(false)
+  const [fieldTouched, setFieldTouched] = useState<Record<string, boolean>>({})
+  const formContainerRef = useRef<HTMLDivElement>(null)
 
   // Define prices based on language, matching pricing-section.tsx
   const prices = {
@@ -166,7 +171,14 @@ export default function TypeformContact({
       placeholder: t("contact.step1.placeholder"),
       icon: <User className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value.trim().length >= 2 ? "" : t("contact.step1.error") || "El nombre debe tener al menos 2 caracteres"),
+      validate: (value: string) => {
+        if (!value.trim()) {
+          return t("contact.step1.error.empty") || "Por favor, introduce tu nombre"
+        }
+        return value.trim().length >= 2
+          ? ""
+          : t("contact.step1.error") || "El nombre debe tener al menos 2 caracteres"
+      },
     },
     {
       id: "email",
@@ -177,8 +189,13 @@ export default function TypeformContact({
       icon: <Mail className="h-6 w-6" />,
       required: true,
       validate: (value: string) => {
+        if (!value.trim()) {
+          return t("contact.step2.error.empty") || "Por favor, introduce tu correo electrónico"
+        }
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return emailRegex.test(value) ? "" : t("contact.step2.error") || "Por favor, introduce un correo válido"
+        return emailRegex.test(value)
+          ? ""
+          : t("contact.step2.error") || "Por favor, introduce un correo válido"
       },
     },
     {
@@ -189,7 +206,14 @@ export default function TypeformContact({
       placeholder: t("contact.step3.placeholder"),
       icon: <Building className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value.trim().length >= 2 ? "" : t("contact.step3.error") || "El nombre de la empresa es requerido"),
+      validate: (value: string) => {
+        if (!value.trim()) {
+          return t("contact.step3.error.empty") || "Por favor, introduce el nombre de la empresa"
+        }
+        return value.trim().length >= 2
+          ? ""
+          : t("contact.step3.error") || "El nombre de la empresa debe tener al menos 2 caracteres"
+      },
     },
     {
       id: "whatsapp",
@@ -208,7 +232,8 @@ export default function TypeformContact({
       type: "radio",
       icon: <Package className="h-6 w-6" />,
       required: true,
-      validate: (value: string) => (value ? "" : t("contact.step5.error") || "Por favor selecciona un plan"),
+      validate: (value: string) =>
+        value ? "" : t("contact.step5.error") || "Por favor selecciona un plan",
     },
     {
       id: "message",
@@ -231,13 +256,26 @@ export default function TypeformContact({
     const error = step.validate(value)
 
     setErrors((prev) => ({ ...prev, [step.id]: error }))
+    setShowValidation(true)
+    
+    // Mostrar animación de error si hay error
+    if (error) {
+      setTimeout(() => setShowValidation(false), 3000)
+    }
+    
     return !error
   }
 
   const handleNext = () => {
+    setFieldTouched((prev) => ({ ...prev, [currentStepData.id]: true }))
+    
     if (validateCurrentStep()) {
       if (currentStep < steps.length - 1) {
         setCurrentStep((prev) => prev + 1)
+        setShowValidation(false)
+        if (formContainerRef.current) {
+          formContainerRef.current.scrollTo({ top: 0, behavior: "smooth" })
+        }
       } else {
         handleSubmit()
       }
@@ -247,16 +285,32 @@ export default function TypeformContact({
   const handlePrev = () => {
     if (currentStep > 0) {
       setCurrentStep((prev) => prev - 1)
+      setShowValidation(false)
+      if (formContainerRef.current) {
+        formContainerRef.current.scrollTo({ top: 0, behavior: "smooth" })
+      }
     }
   }
 
   const handleInputChange = (value: string) => {
     const stepId = currentStepData.id as keyof typeof formData
     setFormData((prev) => ({ ...prev, [stepId]: value }))
+    setFieldTouched((prev) => ({ ...prev, [stepId]: true }))
 
-    // Clear error when user starts typing
     if (errors[stepId]) {
       setErrors((prev) => ({ ...prev, [stepId]: "" }))
+      setShowValidation(false)
+    }
+  }
+
+  const handleBlur = () => {
+    const stepId = currentStepData.id
+    setFieldTouched((prev) => ({ ...prev, [stepId]: true }))
+    
+    if (fieldTouched[stepId] && currentStepData.required) {
+      const value = formData[stepId as keyof typeof formData]
+      const error = currentStepData.validate(value)
+      setErrors((prev) => ({ ...prev, [stepId]: error }))
     }
   }
 
@@ -295,7 +349,6 @@ ${currentUrl}
       setIsSubmitting(false)
       setIsCompleted(true)
 
-      // Abrir WhatsApp
       const whatsappMessage = generateWhatsAppMessage()
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
       window.open(whatsappUrl, "_blank")
@@ -309,14 +362,39 @@ ${currentUrl}
     }
   }
 
-  // Auto-focus input when step changes
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     const input = document.querySelector("input, textarea") as HTMLElement
-  //     if (input) input.focus()
-  //   }, 300)
-  //   return () => clearTimeout(timer)
-  // }, [currentStep])
+  // Componente de validación mejorado
+  const ValidationMessage = ({ error, stepId }: { error: string; stepId: string }) => {
+    if (!error || !showValidation) return null
+
+    return (
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+          transition={{ duration: 0.3, type: "spring", damping: 20 }}
+          className="mt-3"
+        >
+          <div className="flex items-start space-x-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl shadow-sm">
+            <div className="flex-shrink-0">
+              <AlertCircle className="h-5 w-5 text-red-500 dark:text-red-400 mt-0.5" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-red-800 dark:text-red-200">
+                {error}
+              </p>
+            </div>
+            <button
+              onClick={() => setShowValidation(false)}
+              className="flex-shrink-0 p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-800/30 transition-colors"
+            >
+              <X className="h-4 w-4 text-red-500 dark:text-red-400" />
+            </button>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    )
+  }
 
   if (isCompleted) {
     return (
@@ -348,6 +426,9 @@ ${currentUrl}
                 plan: "",
                 message: "",
               })
+              setErrors({})
+              setFieldTouched({})
+              setShowValidation(false)
             }}
             variant="outline"
             className="border-gray-300 dark:border-gray-600"
@@ -359,11 +440,13 @@ ${currentUrl}
     )
   }
 
+  const hasError = errors[currentStepData.id] && showValidation
+  const isFieldValid = fieldTouched[currentStepData.id] && !errors[currentStepData.id] && formData[currentStepData.id as keyof typeof formData]
+
   return (
     <div
       className={`min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex flex-col ${className}`}
     >
-      {/* Progress Bar */}
       <div className="w-full bg-gray-200 dark:bg-gray-700 h-1">
         <motion.div
           className="h-1 bg-gradient-to-r from-blue-500 to-purple-600"
@@ -373,9 +456,11 @@ ${currentUrl}
         />
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="w-full max-w-2xl">
+        <div
+          ref={formContainerRef}
+          className="w-full max-w-2xl h-[80vh] overflow-y-auto"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -383,94 +468,127 @@ ${currentUrl}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="space-y-8"
+              className="space-y-8 p-4"
             >
-              {/* Header */}
               <div className="text-center space-y-4">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
-                  {currentStepData.icon}
-                </div>
+                <motion.div 
+                  className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 transition-all duration-300 ${
+                    hasError
+                      ? "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 animate-pulse"
+                      : isFieldValid
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400"
+                      : "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+                  }`}
+                  animate={hasError ? { scale: [1, 1.05, 1] } : {}}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isFieldValid ? <CheckCircle className="h-6 w-6" /> : currentStepData.icon}
+                </motion.div>
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
                   {currentStepData.title}
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300">{currentStepData.subtitle}</p>
               </div>
 
-              {/* Form Field */}
               <div className="space-y-6">
                 {currentStepData.type === "radio" ? (
-                  <RadioGroup value={formData.plan} onValueChange={handleInputChange} className="space-y-4">
-                    {updatedPlans.map((plan) => (
-                      <motion.div
-                        key={plan.id}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`relative p-6 rounded-2xl border-2 cursor-pointer transition-all ${
-                          formData.plan === plan.id
-                            ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-                            : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
-                        }`}
-                        onClick={() => handleInputChange(plan.id)}
-                      >
-                        <div className="flex items-start space-x-4">
-                          <RadioGroupItem value={plan.id} id={plan.id} className="mt-1" />
-                          <div className="flex-1">
-                            <Label htmlFor={plan.id} className="cursor-pointer">
-                              <div className="flex items-center justify-between mb-2">
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
-                                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                                  {language === "es" ? plan.price : `R$ ${plan.price}`}
-                                </span>
-                              </div>
-                              <p className="text-gray-600 dark:text-gray-300 mb-3">{plan.description}</p>
-                              <ul className="space-y-1">
-                                {plan.features.map((feature, index) => (
-                                  <li
-                                    key={index}
-                                    className="text-sm text-gray-500 dark:text-gray-400 flex items-center"
-                                  >
-                                    <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                                    {feature}
-                                  </li>
-                                ))}
-                              </ul>
-                            </Label>
+                  <div className="space-y-4">
+                    <RadioGroup value={formData.plan} onValueChange={handleInputChange}>
+                      {updatedPlans.map((plan) => (
+                        <motion.div
+                          key={plan.id}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`relative p-6 rounded-2xl border-2 cursor-pointer transition-all ${
+                            formData.plan === plan.id
+                              ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+                              : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                          }`}
+                          onClick={() => handleInputChange(plan.id)}
+                        >
+                          <div className="flex items-start space-x-4">
+                            <RadioGroupItem value={plan.id} id={plan.id} className="mt-1" />
+                            <div className="flex-1">
+                              <Label htmlFor={plan.id} className="cursor-pointer">
+                                <div className="flex items-center justify-between mb-2">
+                                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{plan.name}</h3>
+                                  <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                                    {language === "es" ? plan.price : `R$ ${plan.price}`}
+                                  </span>
+                                </div>
+                                <p className="text-gray-600 dark:text-gray-300 mb-3">{plan.description}</p>
+                                <ul className="space-y-1">
+                                  {plan.features.map((feature, index) => (
+                                    <li
+                                      key={index}
+                                      className="text-sm text-gray-500 dark:text-gray-400 flex items-center"
+                                    >
+                                      <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                                      {feature}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </Label>
+                            </div>
                           </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </RadioGroup>
+                        </motion.div>
+                      ))}
+                    </RadioGroup>
+                    <ValidationMessage error={errors[currentStepData.id]} stepId={currentStepData.id} />
+                  </div>
                 ) : currentStepData.type === "textarea" ? (
-                  <Textarea
-                    value={formData[currentStepData.id as keyof typeof formData]}
-                    onChange={(e) => handleInputChange(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder={currentStepData.placeholder}
-                    className="w-full text-lg p-6 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400 resize-none h-32"
-                  />
+                  <div>
+                    <Textarea
+                      value={formData[currentStepData.id as keyof typeof formData]}
+                      onChange={(e) => handleInputChange(e.target.value)}
+                      onKeyDown={handleKeyPress}
+                      onBlur={handleBlur}
+                      placeholder={currentStepData.placeholder}
+                      className={`w-full text-lg p-6 border-2 rounded-2xl resize-none h-32 transition-all duration-300 ${
+                        hasError
+                          ? "border-red-500 dark:border-red-400 bg-red-50/50 dark:bg-red-900/10 focus:border-red-500 dark:focus:border-red-400"
+                          : isFieldValid
+                          ? "border-green-500 dark:border-green-400 bg-green-50/50 dark:bg-green-900/10 focus:border-green-500 dark:focus:border-green-400"
+                          : "border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400"
+                      }`}
+                      autoFocus={false}
+                    />
+                    <ValidationMessage error={errors[currentStepData.id]} stepId={currentStepData.id} />
+                  </div>
                 ) : (
-                  <Input
-                    type={currentStepData.type}
-                    value={formData[currentStepData.id as keyof typeof formData]}
-                    onChange={(e) => handleInputChange(e.target.value)}
-                    onKeyDown={handleKeyPress}
-                    placeholder={currentStepData.placeholder}
-                    className="w-full text-lg p-6 border-2 border-gray-200 dark:border-gray-700 rounded-2xl focus:border-blue-500 dark:focus:border-blue-400"
-                  />
-                )}
-
-                {errors[currentStepData.id] && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-red-500 text-sm"
-                  >
-                    {errors[currentStepData.id]}
-                  </motion.p>
+                  <div>
+                    <div className="relative">
+                      <Input
+                        type={currentStepData.type}
+                        value={formData[currentStepData.id as keyof typeof formData]}
+                        onChange={(e) => handleInputChange(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        onBlur={handleBlur}
+                        placeholder={currentStepData.placeholder}
+                        className={`w-full text-lg p-6 border-2 rounded-2xl transition-all duration-300 ${
+                          hasError
+                            ? "border-red-500 dark:border-red-400 bg-red-50/50 dark:bg-red-900/10 focus:border-red-500 dark:focus:border-red-400"
+                            : isFieldValid
+                            ? "border-green-500 dark:border-green-400 bg-green-50/50 dark:bg-green-900/10 focus:border-green-500 dark:focus:border-green-400"
+                            : "border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400"
+                        }`}
+                        autoFocus={false}
+                      />
+                      {isFieldValid && (
+                        <motion.div
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2"
+                        >
+                          <CheckCircle className="h-5 w-5 text-green-500" />
+                        </motion.div>
+                      )}
+                    </div>
+                    <ValidationMessage error={errors[currentStepData.id]} stepId={currentStepData.id} />
+                  </div>
                 )}
               </div>
 
-              {/* Navigation */}
               <div className="flex items-center justify-between pt-8">
                 <Button
                   onClick={handlePrev}
@@ -486,32 +604,40 @@ ${currentUrl}
                   {currentStep + 1} de {steps.length}
                 </div>
 
-                <Button
-                  onClick={handleNext}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
-                  disabled={isSubmitting}
+                <motion.div
+                  animate={hasError ? { x: [-10, 10, -10, 10, 0] } : {}}
+                  transition={{ duration: 0.4 }}
                 >
-                  {isSubmitting ? (
-                    t("contact.button.submitting")
-                  ) : currentStep === steps.length - 1 ? (
-                    <>
-                      <MessageCircle className="mr-2 h-4 w-4" />
-                      {t("contact.button.submit")}
-                    </>
-                  ) : (
-                    <>
-                      {t("contact.button.next")}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </>
-                  )}
-                </Button>
+                  <Button
+                    onClick={handleNext}
+                    className={`transition-all duration-300 ${
+                      hasError
+                        ? "bg-red-500 hover:bg-red-600 animate-pulse"
+                        : "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700"
+                    }`}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      t("contact.button.submitting")
+                    ) : currentStep === steps.length - 1 ? (
+                      <>
+                        <MessageCircle className="mr-2 h-4 w-4" />
+                        {t("contact.button.submit")}
+                      </>
+                    ) : (
+                      <>
+                        {t("contact.button.next")}
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+                </motion.div>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
 
-      {/* Footer */}
       <div className="text-center p-4">
         <p className="text-sm text-gray-500 dark:text-gray-400">
           Presiona <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-xs">Enter</kbd> para continuar
