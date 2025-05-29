@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import { Contact } from "lucide-react"
 
 export type Language = "es" | "pt"
 
@@ -260,6 +261,7 @@ const translations = {
     "contact.button.prev": "Anterior",
     "contact.button.next": "Siguiente",
     "contact.button.submit": "Enviar",
+    "contact.button.submitwhatsapp": "Enviar por WhatsApp",
     "contact.button.submitting": "Enviando...",
     "contact.button.reset": "Enviar otro mensaje",
     "contact.success.title": "¡Mensaje enviado con éxito!",
@@ -580,6 +582,7 @@ const translations = {
     "contact.step6.placeholder": "Conte-nos mais sobre seu projeto...",
     "contact.button.prev": "Anterior",
     "contact.button.next": "Próximo",
+    "contact.button.submitwhatsapp": "Enviar pelo WhatsApp",
     "contact.button.submit": "Enviar",
     "contact.button.submitting": "Enviando...",
     "contact.button.reset": "Enviar outra mensagem",

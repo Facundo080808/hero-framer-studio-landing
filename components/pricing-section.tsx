@@ -7,7 +7,7 @@ import { Check } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
 export function PricingSection() {
-  const { t, language } = useLanguage() // Add language to the destructured hook
+  const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
 
@@ -114,8 +114,9 @@ export function PricingSection() {
     },
   ]
 
-  const scrollToContact = () => {
-    const contactSection = document.querySelector('#contacto-form')
+  const scrollToContact = (planName: string) => {
+    sessionStorage.setItem('selectedPlan', planName);
+    const contactSection = document.querySelector('#contact-form')
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' })
     }
@@ -189,7 +190,7 @@ export function PricingSection() {
                       ? "bg-secondary hover:bg-secondary/90 text-white"
                       : "bg-primary hover:bg-primary/90 text-white"
                     }`}
-                  onClick={scrollToContact}
+                  onClick={() => scrollToContact(plan.name)}
                 >
                   {t("pricing.button")}
                 </Button>

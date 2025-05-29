@@ -162,6 +162,19 @@ export default function TypeformContact({
     }
   })
 
+  // Read selected plan from sessionStorage and set it
+  useEffect(() => {
+    const selectedPlan = sessionStorage.getItem('selectedPlan')
+    if (selectedPlan) {
+      const planId = updatedPlans.find((plan) => plan.name === selectedPlan)?.id
+      if (planId) {
+        setFormData((prev) => ({ ...prev, plan: planId }))
+        setCurrentStep(4) // Jump to the plan selection step
+        sessionStorage.removeItem('selectedPlan') // Clear sessionStorage after use
+      }
+    }
+  }, [updatedPlans])
+
   const steps = [
     {
       id: "name",
@@ -192,7 +205,7 @@ export default function TypeformContact({
         if (!value.trim()) {
           return t("contact.step2.error.empty") || "Por favor, introduce tu correo electrónico"
         }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(value)
           ? ""
           : t("contact.step2.error") || "Por favor, introduce un correo válido"
@@ -258,7 +271,6 @@ export default function TypeformContact({
     setErrors((prev) => ({ ...prev, [step.id]: error }))
     setShowValidation(true)
     
-    // Mostrar animación de error si hay error
     if (error) {
       setTimeout(() => setShowValidation(false), 3000)
     }
@@ -318,28 +330,46 @@ export default function TypeformContact({
     const selectedPlan = updatedPlans.find((plan) => plan.id === formData.plan)
     const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
-    return encodeURIComponent(`🚀 *SOLICITUD DE LANDING PAGE - HERO&FRAMER STUDIO*
+    const message = [
+      "*SOLICITUD DE LANDING PAGE*",
+      "*STUDIO FRAMER PROTOLYLAB*",
+      "",
+      "*DATOS DEL CLIENTE:*",
+      `• Nombre: ${formData.name}`,
+      `• Email: ${formData.email}`,
+      `• Empresa: ${formData.company}`,
+      `• WhatsApp: ${formData.whatsapp || "No proporcionado"}`,
+      "",
+      "*PLAN SELECCIONADO:*",
+      `• Plan: *${selectedPlan?.name || "No especificado"}*`,
+      `• Precio: *${selectedPlan?.price || "No especificado"}*`,
+      `• Descripción: ${selectedPlan?.description || "No especificado"}`,
+      "",
+    ]
 
-👤 *DATOS DEL CLIENTE:*
-• Nombre: ${formData.name}
-• Email: ${formData.email}
-• Empresa: ${formData.company}
-${formData.whatsapp ? `• WhatsApp: ${formData.whatsapp}` : ""}
+    if (formData.message.trim()) {
+      message.push(
+        "*MENSAJE ADICIONAL:*",
+        formData.message.trim(),
+        ""
+      )
+    }
 
-📋 *PLAN SELECCIONADO:*
-• Plan: ${selectedPlan?.name || "No especificado"}
-• Precio: ${selectedPlan?.price ? (language === "es" ? selectedPlan.price : `R$ ${selectedPlan.price}`) : "No especificado"}
-• Descripción: ${selectedPlan?.description || "No especificado"}
+    message.push(
+      "*ENLACE DE REFERENCIA:*",
+      currentUrl,
+      "",
+      "━━━━━━━━━━━━━━━━━━━━",
+      "*Solicitud generada desde*",
+      "*Studio Framer ProtolyLab*",
+      "*Landing Pages que Convierten*"
+    )
 
-💬 *MENSAJE ADICIONAL:*
-${formData.message || "Sin mensaje adicional"}
-
-🌐 *ENLACE DE REFERENCIA:*
-${currentUrl}
-
----
-*Solicitud generada desde Hero&Framer Studio*
-*Landing Pages que Convierten*`)
+    return message
+      .join('\n')
+      .replace(/\*/g, '**')
+      .replace(/\n/g, '%0a')
+      .replace(/\s+/g, '%20')
   }
 
   const handleSubmit = () => {
@@ -362,7 +392,6 @@ ${currentUrl}
     }
   }
 
-  // Componente de validación mejorado
   const ValidationMessage = ({ error, stepId }: { error: string; stepId: string }) => {
     if (!error || !showValidation) return null
 
@@ -399,6 +428,7 @@ ${currentUrl}
   if (isCompleted) {
     return (
       <div
+        id="contact-form"
         className={`min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex items-center justify-center p-4 ${className}`}
       >
         <motion.div
@@ -445,6 +475,7 @@ ${currentUrl}
 
   return (
     <div
+      id="contact-form"
       className={`min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 flex flex-col ${className}`}
     >
       <div className="w-full bg-gray-200 dark:bg-gray-700 h-1">
@@ -622,7 +653,7 @@ ${currentUrl}
                     ) : currentStep === steps.length - 1 ? (
                       <>
                         <MessageCircle className="mr-2 h-4 w-4" />
-                        {t("contact.button.submit")}
+                        {t("contact.button.submitwhatsapp")}
                       </>
                     ) : (
                       <>
