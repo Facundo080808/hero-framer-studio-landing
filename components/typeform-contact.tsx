@@ -331,16 +331,16 @@ export default function TypeformContact({
     const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
     const message = [
-      "*SOLICITUD DE LANDING PAGE*",
-      "*STUDIO FRAMER PROTOLYLAB*",
+      "SOLICITUD DE LANDING PAGE",
+      "STUDIO FRAMER PROTOLYLAB",
       "",
-      "*DATOS DEL CLIENTE:*",
+      "DATOS DEL CLIENTE:",
       `• Nombre: ${formData.name}`,
       `• Email: ${formData.email}`,
       `• Empresa: ${formData.company}`,
       `• WhatsApp: ${formData.whatsapp || "No proporcionado"}`,
       "",
-      "*PLAN SELECCIONADO:*",
+      "PLAN SELECCIONADO:",
       `• Plan: *${selectedPlan?.name || "No especificado"}*`,
       `• Precio: *${selectedPlan?.price || "No especificado"}*`,
       `• Descripción: ${selectedPlan?.description || "No especificado"}`,
@@ -349,20 +349,20 @@ export default function TypeformContact({
 
     if (formData.message.trim()) {
       message.push(
-        "*MENSAJE ADICIONAL:*",
+        "MENSAJE ADICIONAL:",
         formData.message.trim(),
         ""
       )
     }
 
     message.push(
-      "*ENLACE DE REFERENCIA:*",
+      "ENLACE DE REFERENCIA:",
       currentUrl,
       "",
       "━━━━━━━━━━━━━━━━━━━━",
-      "*Solicitud generada desde*",
-      "*Studio Framer ProtolyLab*",
-      "*Landing Pages que Convierten*"
+      "Solicitud generada desde",
+      "Studio Framer ProtolyLab",
+      "Landing Pages que Convierten"
     )
 
     return message
