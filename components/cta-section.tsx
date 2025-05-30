@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle, MousePointer, Zap } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
 
 export function CtaSection() {
@@ -129,10 +130,12 @@ export function CtaSection() {
               whileTap={{ scale: 0.98 }}
               className="inline-block"
             >
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-7 h-auto group">
-                {t("cta.button")}
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
+              <Link href="#contact-form">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-7 h-auto group">
+                  {t("cta.button")}
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
             </motion.div>
 
             <p className="mt-4 text-sm text-white/70">{t("cta.note")}</p>

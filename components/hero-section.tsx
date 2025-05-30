@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { ArrowRight, CheckCircle, MousePointer, Users } from "lucide-react"
@@ -171,7 +172,7 @@ export function HeroSection() {
               size="lg" 
               className="bg-secondary hover:bg-secondary/90 text-white text-lg px-8 py-7 h-auto group"
               onClick={() => {
-                const contactSection = document.getElementById('contacto-form');
+                const contactSection = document.getElementById('contact-form');
                 if (contactSection) {
                   contactSection.scrollIntoView({ behavior: 'smooth' });
                 }
@@ -180,9 +181,11 @@ export function HeroSection() {
               {t("hero.cta.primary")}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button size="lg" variant="outline" className="border-primary dark:border-white text-lg px-8 py-7 h-auto">
-              {t("hero.cta.secondary")}
-            </Button>
+            <Link href="#portafolio">
+              <Button size="lg" variant="outline" className="border-primary dark:border-white text-lg px-8 py-7 h-auto">
+                {t("hero.cta.secondary")}
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-4 mb-6">

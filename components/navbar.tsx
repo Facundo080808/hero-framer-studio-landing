@@ -65,9 +65,11 @@ export function Navbar() {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-4">
-            <Button className="bg-secondary hover:bg-secondary/90 text-white hidden md:inline-flex">
-              {t("nav.consultation")}
-            </Button>
+            <Link href="#contact-form" className="hidden md:block">
+              <Button className="bg-secondary hover:bg-secondary/90 text-white">
+                {t("nav.consultation")}
+              </Button>
+            </Link>
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ModeToggle />
