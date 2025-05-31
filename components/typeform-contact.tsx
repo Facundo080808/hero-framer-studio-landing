@@ -188,9 +188,9 @@ export default function TypeformContact({
         if (!value.trim()) {
           return t("contact.step1.error.empty") || "Por favor, introduce tu nombre"
         }
-        return value.trim().length >= 2
+        return value.trim().length >= 5
           ? ""
-          : t("contact.step1.error") || "El nombre debe tener al menos 2 caracteres"
+          : t("contact.step1.error.minLength") || "Ingresa un nombre de mínimo 5 caracteres"
       },
     },
     {
@@ -208,7 +208,7 @@ export default function TypeformContact({
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(value)
           ? ""
-          : t("contact.step2.error") || "Por favor, introduce un correo válido"
+          : t("contact.step2.error.invalid") || "Ingresa un correo electrónico válido"
       },
     },
     {
@@ -223,9 +223,9 @@ export default function TypeformContact({
         if (!value.trim()) {
           return t("contact.step3.error.empty") || "Por favor, introduce el nombre de la empresa"
         }
-        return value.trim().length >= 2
+        return value.trim().length >= 5
           ? ""
-          : t("contact.step3.error") || "El nombre de la empresa debe tener al menos 2 caracteres"
+          : t("contact.step3.error.minLength") || "Ingresa un nombre de empresa de mínimo 5 caracteres"
       },
     },
     {
@@ -246,7 +246,7 @@ export default function TypeformContact({
       icon: <Package className="h-6 w-6" />,
       required: true,
       validate: (value: string) =>
-        value ? "" : t("contact.step5.error") || "Por favor selecciona un plan",
+        value ? "" : t("contact.step5.error.select") || "Elige el plan que necesitas",
     },
     {
       id: "message",
