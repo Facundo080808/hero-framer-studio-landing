@@ -104,7 +104,7 @@ export default function TypeformContact({
       ],
     },
   ],
-  whatsappNumber = "56930835236",
+  whatsappNumber = "3148171914",//56930835236
   className = "",
 }: TypeformContactProps) {
   const { language, t } = useLanguage()
@@ -331,38 +331,38 @@ export default function TypeformContact({
     const currentUrl = typeof window !== "undefined" ? window.location.href : ""
 
     const message = [
-      "SOLICITUD DE LANDING PAGE",
-      "STUDIO FRAMER PROTOLYLAB",
+      t("whatsapp.title"),
+      t("whatsapp.subtitle"),
       "",
-      "DATOS DEL CLIENTE:",
-      `• Nombre: ${formData.name}`,
-      `• Email: ${formData.email}`,
-      `• Empresa: ${formData.company}`,
-      `• WhatsApp: ${formData.whatsapp || "No proporcionado"}`,
+      t("whatsapp.customer_data") + ":",
+      `• ${t("form.name")}: ${formData.name}`,
+      `• ${t("form.email")}: ${formData.email}`,
+      `• ${t("form.company")}: ${formData.company}`,
+      `• ${t("form.whatsapp")}: ${formData.whatsapp || t("form.not_provided")}`,
       "",
-      "PLAN SELECCIONADO:",
-      `• Plan: *${selectedPlan?.name || "No especificado"}*`,
-      `• Precio: *${selectedPlan?.price || "No especificado"}*`,
-      `• Descripción: ${selectedPlan?.description || "No especificado"}`,
+      t("whatsapp.selected_plan") + ":",
+      `• ${t("form.plan")}: *${selectedPlan?.name || t("form.not_specified")}*`,
+      `• ${t("form.price")}: *${selectedPlan?.price || t("form.not_specified")}*`,
+      `• ${t("form.description")}: ${selectedPlan?.description || t("form.not_specified")}`, 
       "",
     ]
 
     if (formData.message.trim()) {
       message.push(
-        "MENSAJE ADICIONAL:",
+        t("whatsapp.additional_message"),
         formData.message.trim(),
         ""
       )
     }
 
     message.push(
-      "ENLACE DE REFERENCIA:",
+      t("whatsapp.reference_link"),
       currentUrl,
       "",
       "━━━━━━━━━━━━━━━━━━━━",
-      "Solicitud generada desde",
-      "Studio Framer ProtolyLab",
-      "Landing Pages que Convierten"
+      t("whatsapp.generated_by"),
+      t("whatsapp.company_name"),
+      t("whatsapp.tagline")
     )
 
     return message
