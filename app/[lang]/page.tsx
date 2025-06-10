@@ -26,7 +26,7 @@ export default function Home() {
       <ProcessSection />
       <PortfolioSection />
       <TestimonialsSection />
-      <PricingSection />
+      {/* <PricingSection /> */}
       {/* <ContactForm /> */}
       <TypeformContact />
       <CtaSection />
