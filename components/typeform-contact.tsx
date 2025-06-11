@@ -133,13 +133,12 @@ export default function TypeformContact({
       enterprise: "199.990 CLP neto",
     },
     pt: {
-      startup: "479",
-      grow: "700",
-      scaleUp: "990",
-      enterprise: "1490",
+      startup: "879",
+      grow: "1.490",
+      scaleUp: "1.980",
+      enterprise: "3.490",
     },
   }
-
   // Map plan IDs to translation keys
   const planKeyMap: Record<string, string> = {
     startup: "plan4",
@@ -175,6 +174,12 @@ export default function TypeformContact({
     }
   }, [updatedPlans])
 
+  // Function to determine if plan selection step should be shown
+  const shouldShowPlanStep = () => {
+    return language !== "es"
+  }
+
+  // Adjust steps based on language
   const steps = [
     {
       id: "name",
@@ -238,7 +243,7 @@ export default function TypeformContact({
       required: false,
       validate: () => "",
     },
-    {
+    ...(shouldShowPlanStep() ? [{
       id: "plan",
       title: t("contact.step5.title"),
       subtitle: t("contact.step5.title"),
@@ -247,7 +252,7 @@ export default function TypeformContact({
       required: true,
       validate: (value: string) =>
         value ? "" : t("contact.step5.error.select") || "Elige el plan que necesitas",
-    },
+    }] : []),
     {
       id: "message",
       title: t("contact.step6.title"),
@@ -437,9 +442,7 @@ export default function TypeformContact({
           transition={{ duration: 0.5, type: "spring" }}
           className="text-center max-w-md"
         >
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 mb-6">
-            <CheckCircle className="h-10 w-10 text-green-600 dark:text-green-400" />
-          </div>
+sony.1
           <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">{t("contact.success.title")}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             {t("contact.success.message")}
@@ -522,7 +525,7 @@ export default function TypeformContact({
               </div>
 
               <div className="space-y-6">
-                {currentStepData.type === "radio" ? (
+                {currentStepData.type === "radio" && shouldShowPlanStep() ? (
                   <div className="space-y-4">
                     <RadioGroup value={formData.plan} onValueChange={handleInputChange}>
                       {updatedPlans.map((plan) => (

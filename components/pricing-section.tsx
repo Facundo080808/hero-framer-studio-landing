@@ -41,10 +41,10 @@ export function PricingSection() {
       enterprise: "199.990 CLP neto",
     },
     pt: {
-      startup: "479",
-      grow: "700",
-      scaleUp: "990",
-      enterprise: "1490",
+      startup: "879",
+      grow: "1.490",
+      scaleUp: "1.980",
+      enterprise: "3.490",
     },
   }
 
@@ -122,6 +122,11 @@ export function PricingSection() {
     }
   }
 
+  // Function to determine if cards should be shown
+  const shouldShowCards = () => {
+    return language !== "es"
+  }
+
   return (
     <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50">
       <div className="container mx-auto px-4">
@@ -142,62 +147,64 @@ export function PricingSection() {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {plans.map((plan, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -10, transition: { duration: 0.3 } }}
-              className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${plan.popular ? "border-secondary" : "border-border"} overflow-hidden`}
-            >
-              {plan.popular && (
-                <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
-                  {t("pricing.popular_label")}
-                </div>
-              )}
-
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-2 text-primary dark:text-white">{plan.name}</h3>
-                <p className="text-muted-foreground mb-6">{plan.description}</p>
-
-                <div className="mb-6">
-                  <div className="text-4xl font-bold text-primary dark:text-white">
-                    {language === "es" ? plan.price : `R$ ${plan.price}`}
+        {shouldShowCards() && (
+          <motion.div
+            variants={containerVariants}
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {plans.map((plan, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+                className={`bg-white dark:bg-slate-800 rounded-lg shadow-md border ${plan.popular ? "border-secondary" : "border-border"} overflow-hidden`}
+              >
+                {plan.popular && (
+                  <div className="bg-secondary text-white text-center py-2 text-sm font-medium">
+                    {t("pricing.popular_label")}
                   </div>
-                  <div className="text-sm text-muted-foreground mt-1">
-                    {language === "es" 
-                      ? "+ 10% de Crédito al Contado o en Cuotas"
-                      : "+ 10% Crédito a Vista o Parcelado"
-                    }
+                )}
+
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-2 text-primary dark:text-white">{plan.name}</h3>
+                  <p className="text-muted-foreground mb-6">{plan.description}</p>
+
+                  <div className="mb-6">
+                    <div className="text-4xl font-bold text-primary dark:text-white">
+                      {language === "es" ? plan.price : `R$ ${plan.price}`}
+                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">
+                      {language === "es" 
+                        ? "+ 10% de Crédito al Contado o en Cuotas"
+                        : "+ 10% Crédito a Vista o Parcelado"
+                      }
+                    </div>
                   </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <Check className="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    className={`w-full ${plan.popular
+                        ? "bg-secondary hover:bg-secondary/90 text-white"
+                        : "bg-primary hover:bg-primary/90 text-white"
+                      }`}
+                    onClick={() => scrollToContact(plan.name)}
+                  >
+                    {t("pricing.button")}
+                  </Button>
                 </div>
-
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start">
-                      <Check className="h-5 w-5 text-secondary mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Button
-                  className={`w-full ${plan.popular
-                      ? "bg-secondary hover:bg-secondary/90 text-white"
-                      : "bg-primary hover:bg-primary/90 text-white"
-                    }`}
-                  onClick={() => scrollToContact(plan.name)}
-                >
-                  {t("pricing.button")}
-                </Button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   )
