@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Check } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
-export function PricingSection() {
+export function   PricingSection() {
   const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 })
@@ -41,10 +41,10 @@ export function PricingSection() {
       enterprise: "199.990 CLP neto",
     },
     pt: {
-      startup: "879",
-      grow: "1.490",
-      scaleUp: "1.980",
-      enterprise: "3.490",
+      startup: "R$ 897 à vista ou 6x R$ 162 ",
+      grow: "R$ 1.597  à vista ou 6x R$ 294",
+      scaleUp: "R$ 1.997 à vista ou 6x R$ 368",
+      enterprise: "R$ 3.297 à vista ou 6x R$ 608",
     },
   }
 
@@ -61,6 +61,7 @@ export function PricingSection() {
         t("pricing.plan4.features.5"),
         t("pricing.plan4.features.6"),
         t("pricing.plan4.features.7"),
+        t("pricing.plan4.features.8"),
       ],
       popular: false,
     },
@@ -92,8 +93,8 @@ export function PricingSection() {
         t("pricing.plan6.features.5"),
         t("pricing.plan6.features.6"),
         t("pricing.plan6.features.7"),
-        t("pricing.plan6.features.8"),
-        t("pricing.plan6.features.9"),
+        // t("pricing.plan6.features.8"),
+        // t("pricing.plan6.features.9"),
       ],
       popular: false,
     },
@@ -108,7 +109,7 @@ export function PricingSection() {
         t("pricing.plan7.features.4"),
         t("pricing.plan7.features.5"),
         t("pricing.plan7.features.6"),
-        t("pricing.plan7.features.7"),
+        // t("pricing.plan7.features.7"),
       ],
       popular: false,
     },
@@ -171,7 +172,7 @@ export function PricingSection() {
                   <p className="text-muted-foreground mb-6">{plan.description}</p>
 
                   <div className="mb-6">
-                    <div className="text-4xl font-bold text-primary dark:text-white">
+                    <div className="text-3xl font-bold text-primary dark:text-white">
                       {language === "es" ? plan.price : `R$ ${plan.price}`}
                     </div>
                     <div className="text-sm text-muted-foreground mt-1">

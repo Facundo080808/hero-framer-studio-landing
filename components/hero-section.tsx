@@ -3,14 +3,14 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { easeInOut, motion, spring, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, useEffect } from "react"
 import { ArrowRight, CheckCircle, MousePointer, Users } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 
 export function HeroSection() {
   const { t, language } = useLanguage()
-  const targetRef = useRef<HTMLDivElement>(null)
+  const targetRef = useRef<HTMLDivElement>(null)  
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end start"],
@@ -91,7 +91,7 @@ export function HeroSection() {
       scale: 1,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: spring,
         stiffness: 100,
         damping: 15,
       },
@@ -105,7 +105,7 @@ export function HeroSection() {
       transition: {
         duration: 6,
         repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
+        ease: easeInOut,
       },
     },
   }
@@ -208,8 +208,8 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
 
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative">
-          {/* Main mockup */}
+        {/* <motion.div variants={containerVariants} initial="hidden" animate="visible" className="relative">
+        
           <motion.div
             variants={floatingVariants}
             initial="initial"
@@ -218,7 +218,7 @@ export function HeroSection() {
           >
             <div className="relative rounded-xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm">
               <Image
-                src="/placeholder.svg?height=800&width=1400"
+                src="https://imgs.search.brave.com/rGAspx_uOvbQQfow1foE6tNYCNSZGVjqj0dneY3h3sQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNi8w/NC8yMi8xNy8zNi93/b29kZW4tbi0xMzQ2/MTk3XzY0MC5wbmc"
                 alt="Landing page de alto impacto"
                 width={1400}
                 height={800}
@@ -226,7 +226,7 @@ export function HeroSection() {
                 priority
               />
 
-              {/* Interactive elements overlay */}
+             
               <motion.div
                 className="absolute top-[30%] left-[25%] h-12 w-12 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center"
                 animate={{
@@ -259,7 +259,7 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Stats cards */}
+          
           <motion.div
             variants={statsVariants}
             className="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 bg-white dark:bg-slate-800 rounded-lg shadow-xl p-4 border border-border"
@@ -285,7 +285,7 @@ export function HeroSection() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Trusted by logos */}
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="mt-12 text-center">

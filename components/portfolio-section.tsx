@@ -65,6 +65,22 @@ export function PortfolioSection() {
       alt: t("portfolio.item4.alt"),
       url: "https://franchise.perceivoai.agency"
     },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item11.client"),
+      type: t("portfolio.item11.type"),
+      result: t("portfolio.item11.result"),
+      alt: t("portfolio.item11.alt"),
+      url: "https://fisioterapia.protoly.lat/"
+    },
+    {
+      image: "/placeholder.svg",
+      client: t("portfolio.item12.client"),
+      type: t("portfolio.item12.type"),
+      result: t("portfolio.item12.result"),
+      alt: t("portfolio.item12.alt"),
+      url: "http://planejamentopatrimonial.pro"
+    }
    
   ]
 
