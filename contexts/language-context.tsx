@@ -558,7 +558,7 @@ const translations = {
     "pricing.plan3.features.8": "Análise de conversão",
     "pricing.plan3.features.9": "Entrega en 14 días",
     "pricing.plan3.features.10": "Tudo em uma página só",
-    "pricing.plan4.name": "Starter ",
+    "pricing.plan4.name": "STARTER",
     "pricing.plan4.description": "Perfeito para freelancers e pequenos negócios que querem marcar presença online",
     "pricing.plan4.features.1": "1 Landing Page profissional",
     "pricing.plan4.features.2": "Design responsivo premium",
