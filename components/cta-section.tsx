@@ -5,7 +5,6 @@ import { easeInOut, motion, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle, MousePointer, Zap } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useLanguage } from "@/contexts/language-context"
 
 export function CtaSection() {
