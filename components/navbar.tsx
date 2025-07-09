@@ -65,11 +65,11 @@ export function Navbar() {
 
           {/* Right side controls */}
           <div className="flex items-center space-x-4">
-            <Link href="#contact-form" className="hidden md:block">
+            {/* <Link href="#contact-form" className="hidden md:block">
               <Button className="bg-secondary hover:bg-secondary/90 text-white">
-                {t("nav.consultation")}
+                {t("nav.consultation")} 
               </Button>
-            </Link>
+            </Link> */}
             <div className="flex items-center space-x-2">
               <LanguageSwitcher />
               <ModeToggle />
@@ -145,7 +145,7 @@ export function Navbar() {
               className="bg-secondary hover:bg-secondary/90 text-white w-full mt-4 py-6 text-base"
               onClick={() => setIsOpen(false)}
             >
-              {t("nav.consultation")}
+              {t("nav.consultation")} 
             </Button>
           </nav>
         </div>

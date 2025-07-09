@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
-import { motion, useInView } from "framer-motion"
+import { motion, spring, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ShoppingBag, Download, Calendar, CheckCircle, Zap, BarChart } from "lucide-react"
 import Link from "next/link"
@@ -51,7 +51,7 @@ export function ServicesSection() {
       y: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: spring,
         stiffness: 100,
         damping: 15,
       },
@@ -249,7 +249,7 @@ export function ServicesSection() {
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants}>
+          {/* <motion.div variants={itemVariants}>
             <Link 
               href="#contact-form" 
               className="inline-flex items-center text-lg font-medium text-secondary hover:underline"
@@ -257,7 +257,7 @@ export function ServicesSection() {
               {t("services.cta")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>

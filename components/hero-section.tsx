@@ -168,19 +168,22 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          <Button 
-              size="lg" 
-              className="bg-secondary hover:bg-secondary/90 text-white text-lg px-8 py-7 h-auto group"
-              onClick={() => {
-                const contactSection = document.getElementById('contact-form');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-            >
-              {t("hero.cta.primary")}
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
+          
+            <Link href="#pricing">
+                <Button 
+                size="lg" 
+                className="bg-secondary hover:bg-secondary/90 text-white text-lg px-8 py-7 h-auto group"
+                // onClick={() => {
+                //   const contactSection = document.getElementById('contact-form');
+                //   if (contactSection) {
+                //     contactSection.scrollIntoView({ behavior: 'smooth' });
+                //   }
+                // }}
+              >
+                Planes
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
             <Link href="#portafolio">
               <Button size="lg" variant="outline" className="border-primary dark:border-white text-lg px-8 py-7 h-auto">
                 {t("hero.cta.secondary")}

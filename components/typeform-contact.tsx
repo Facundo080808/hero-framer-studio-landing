@@ -104,7 +104,7 @@ export default function TypeformContact({
       ],
     },
   ],
-  whatsappNumber = "3148171914",//56930835236
+  whatsappNumber = "56930835236",//56930835236
   className = "",
 }: TypeformContactProps) {
   const { language, t } = useLanguage()
@@ -656,6 +656,7 @@ sony.1
                     ) : currentStep === steps.length - 1 ? (
                       <>
                         <MessageCircle className="mr-2 h-4 w-4" />
+                        
                         {t("contact.button.submitwhatsapp")}
                       </>
                     ) : (

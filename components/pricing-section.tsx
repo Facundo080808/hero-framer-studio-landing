@@ -129,7 +129,7 @@ export function   PricingSection() {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50">
+    <section ref={sectionRef} className="py-16 md:py-24 bg-muted/50 dark:bg-slate-900/50" id="pricing">
       <div className="container mx-auto px-4">
         <motion.div
           variants={containerVariants}
