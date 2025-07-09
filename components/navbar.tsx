@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { motion, useScroll, useTransform } from "framer-motion"
@@ -20,7 +19,7 @@ export function Navbar() {
   const { t } = useLanguage()
 
   const navItems = [
-    { name: t("nav.blog"), href: "#blog" },
+    // { name: t("nav.blog"), href: "#blog" },
     { name: t("nav.services"), href: "#servicios" },
     { name: t("nav.portfolio"), href: "#portafolio" },
     { name: t("nav.process"), href: "#proceso" },
