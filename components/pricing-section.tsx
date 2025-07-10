@@ -41,10 +41,10 @@ export function   PricingSection() {
       enterprise: "199.990 CLP neto",
     },
     pt: {
-      startup: "R$ 897 à vista ou 6x R$ 162 ",
-      grow: "R$ 1.597  à vista ou 6x R$ 294",
-      scaleUp: "R$ 1.997 à vista ou 6x R$ 368",
-      enterprise: "R$ 3.297 à vista ou 6x R$ 608",
+      startup: " 897 à vista ou 6x R$ 162 ",
+      grow: " 1.597  à vista ou 6x R$ 294",
+      scaleUp: " 1.997 à vista ou 6x R$ 368",
+      enterprise: " 3.297 à vista ou 6x R$ 608",
     },
   }
 
