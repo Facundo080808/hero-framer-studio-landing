@@ -1,5 +1,4 @@
 "use client"
-
 import { useRef } from "react"
 import Image from "next/image"
 import { motion, useInView } from "framer-motion"
@@ -34,7 +33,7 @@ export function PortfolioSection() {
 
   const portfolioItems = [
     {
-      image: "/placeholder.svg",
+      image: "/images/saidafiscal.png",
       client: t("portfolio.item1.client"),
       type: t("portfolio.item1.type"),
       result: t("portfolio.item1.result"),
@@ -50,7 +49,7 @@ export function PortfolioSection() {
       url: "https://whatsorderai.protoly.lat"
     },
     {
-      image: "/placeholder.svg",
+      image: "/images/perceivoAI.png",
       client: t("portfolio.item3.client"),
       type: t("portfolio.item3.type"),
       result: t("portfolio.item3.result"),
@@ -58,7 +57,7 @@ export function PortfolioSection() {
       url: "https://perceivoai.agency"
     },
     {
-      image: "/placeholder.svg",
+      image: "/images/perceivoAIFranquias.png",
       client: t("portfolio.item4.client"),
       type: t("portfolio.item4.type"),
       result: t("portfolio.item4.result"),
@@ -66,7 +65,7 @@ export function PortfolioSection() {
       url: "https://franchise.perceivoai.agency"
     },
     {
-      image: "/placeholder.svg",
+      image: "/images/TorquettiFisioterapia.png",
       client: t("portfolio.item11.client"),
       type: t("portfolio.item11.type"),
       result: t("portfolio.item11.result"),
@@ -74,7 +73,7 @@ export function PortfolioSection() {
       url: "https://fisioterapia.protoly.lat/"
     },
     {
-      image: "/placeholder.svg",
+      image: "/images/PlanejamientoPatrimonial.png",
       client: t("portfolio.item12.client"),
       type: t("portfolio.item12.type"),
       result: t("portfolio.item12.result"),
